@@ -21,12 +21,19 @@ public class Organization extends Auditable {
     @Column
     private String logo;
 
-    private Long owner_id;
+    @Column(name = "owner_id", nullable = false)
+    private Long ownerId;
 
+    @Column
     private String email;
 
+    @Column
     private String code;
 
+    @Column
     private Point location;
+
+    @Column
+    private Boolean isActive;
 
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import uz.doston.springcrm.dto.organization.OrganizationCreateDto;
 import uz.doston.springcrm.dto.organization.OrganizationDto;
 import uz.doston.springcrm.dto.organization.OrganizationUpdateDto;
+import uz.doston.springcrm.entity.organization.Organization;
 import uz.doston.springcrm.mapper.OrganizationMapper;
 import uz.doston.springcrm.repository.organization.OrganizationRepository;
 import uz.doston.springcrm.service.base.AbstractService;
@@ -39,7 +40,8 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
 
     @Override
     public List<OrganizationDto> getAll() {
-        return null;
+        List<Organization> organizations = repository.findAll();
+        return mapper.toDto(organizations);
     }
 
     @Override
