@@ -37,16 +37,26 @@ public class SpringCrmApplication /*implements CommandLineRunner*/ {
         AuthUser admin = new AuthUser();
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("admin123"));
+        admin.setFirstName("admin");
+        admin.setCreatedBy(1L);
+        admin.setUpdatedBy(1L);
+        admin.setAge(22);
+        admin.setEmail("admin@mail.ru");
         AuthRole adminRole = authRoleRepository.findAuthRoleByCode("ADMIN").orElse(new AuthRole());
-        admin.setRoleId(adminRole.getId());
+        admin.setRole(adminRole);
         admin.setCode(UUID.randomUUID());
 
         AuthUser manager = new AuthUser();
         manager.setUsername("manager");
         manager.setPassword(passwordEncoder.encode("manager123"));
+        manager.setFirstName("manager");
+        manager.setAge(25);
+        manager.setCreatedBy(1L);
+        manager.setUpdatedBy(1L);
+        manager.setEmail("manager@mail.ru");
         manager.setCode(UUID.randomUUID());
         AuthRole managerRole = authRoleRepository.findAuthRoleByCode("MANAGER").orElse(new AuthRole());
-        manager.setRoleId(managerRole.getId());
+        manager.setRole(managerRole);
 
         authUserRepository.saveAll(List.of(admin, manager));
     }

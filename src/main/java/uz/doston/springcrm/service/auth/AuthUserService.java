@@ -17,7 +17,7 @@ import java.util.List;
 public class AuthUserService extends AbstractService<AuthUserMapper, AuthUserRepository>
         implements GenericCrudService<AuthUserCreateDto, AuthUserUpdateDto>, GenericService<AuthUserDto> {
 
-    public AuthUserService(@Qualifier(value = "authUserMapper") AuthUserMapper mapper, AuthUserRepository repository) {
+    public AuthUserService(/*@Qualifier(value = "authUserMapper")*/ AuthUserMapper mapper, AuthUserRepository repository) {
         super(mapper, repository);
     }
 

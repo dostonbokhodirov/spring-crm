@@ -5,6 +5,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Mapper(componentModel = "spring")
-public class ProjectMapper implements BaseMapper{
+public interface ProjectMapper extends BaseMapper {
 
 }

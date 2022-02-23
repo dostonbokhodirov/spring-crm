@@ -19,7 +19,7 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
         implements GenericCrudService<OrganizationCreateDto, OrganizationUpdateDto>,
         GenericService<OrganizationDto> {
 
-    public OrganizationService(@Qualifier(value = "organizationMapper") OrganizationMapper mapper, OrganizationRepository repository) {
+    public OrganizationService(/*@Qualifier(value = "organizationMapper") */OrganizationMapper mapper, OrganizationRepository repository) {
         super(mapper, repository);
     }
 

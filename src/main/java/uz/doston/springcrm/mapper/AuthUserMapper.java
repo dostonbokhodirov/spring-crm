@@ -5,5 +5,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Mapper(componentModel = "spring")
-public class AuthUserMapper implements BaseMapper {
+public interface AuthUserMapper extends BaseMapper {
 }
