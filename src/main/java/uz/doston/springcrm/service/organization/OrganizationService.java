@@ -1,6 +1,5 @@
 package uz.doston.springcrm.service.organization;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import uz.doston.springcrm.dto.organization.OrganizationCreateDto;
 import uz.doston.springcrm.dto.organization.OrganizationDto;
@@ -25,17 +24,21 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
 
     @Override
     public void delete(Long id) {
-
+        repository.deleteById(id);
     }
 
     @Override
     public void create(OrganizationCreateDto organizationCreateDto) {
-
+        Organization organization = mapper.fromCreateDto(organizationCreateDto);
+        repository.save(organization);
     }
 
     @Override
     public void update(OrganizationUpdateDto organizationUpdateDto) {
+//        Organization organization = mapper.fromUpdateDto(organizationUpdateDto);
+//        repository.save(organization);
 
+        repository.update(organizationUpdateDto);
     }
 
     @Override
@@ -46,7 +49,8 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
 
     @Override
     public OrganizationDto get(Long id) {
-        return null;
+        Organization organization = repository.findById(id).orElseThrow(() -> new RuntimeException("Organization not found"));
+        return mapper.toDto(organization);
     }
 
 }
