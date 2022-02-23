@@ -1,4 +1,4 @@
-//package uz.doston.springcrm.configs.security;
+package uz.doston.springcrm.config.security;//package uz.doston.springcrm.configs.security;
 //
 //
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;

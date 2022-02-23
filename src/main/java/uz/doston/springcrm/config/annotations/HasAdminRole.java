@@ -1,4 +1,4 @@
-package uz.doston.springcrm.configs.annotations;
+package uz.doston.springcrm.config.annotations;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 

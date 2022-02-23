@@ -1,4 +1,4 @@
-//package uz.doston.springcrm.configs.security;
+package uz.doston.springcrm.config.security;//package uz.doston.springcrm.configs.security;
 //
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

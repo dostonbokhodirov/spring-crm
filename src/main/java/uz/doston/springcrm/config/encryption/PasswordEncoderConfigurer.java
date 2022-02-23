@@ -1,4 +1,4 @@
-package uz.doston.springcrm.configs.encryption;
+package uz.doston.springcrm.config.encryption;
 
 
 import org.springframework.context.annotation.Bean;
