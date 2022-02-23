@@ -1,4 +1,4 @@
-package uz.doston.springcrm.service;
+package uz.doston.springcrm.service.base;
 
 import uz.doston.springcrm.mapper.BaseMapper;
 import uz.doston.springcrm.repository.BaseRepository;
