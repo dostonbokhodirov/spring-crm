@@ -16,6 +16,7 @@ import java.util.UUID;
 @Table(schema = "auth")
 public class AuthUser extends Auditable {
 
+
     @Column(unique = true, nullable = false)
     private String username;
 
@@ -37,9 +38,11 @@ public class AuthUser extends Auditable {
     @Column
     private UUID code;
 
-    private Long organization_id;
+    @Column(name = "organization_id")
+    private Long organizationId;
 
-    private Long role_id;
+    @Column(name = "role_id")
+    private Long roleId;
 
     private Language language;
 }

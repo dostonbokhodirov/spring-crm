@@ -32,6 +32,7 @@ public abstract class Auditable {
     @Column(nullable = false)
     private Date updatedAt;
 
+
     @Column(nullable = false)
     private Long createdBy;
 
