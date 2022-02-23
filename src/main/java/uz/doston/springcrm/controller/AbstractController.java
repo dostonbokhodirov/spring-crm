@@ -1,6 +1,6 @@
 package uz.doston.springcrm.controller;
 
-import uz.doston.springcrm.service.BaseService;
+import uz.doston.springcrm.service.base.BaseService;
 
 public abstract class AbstractController<S extends BaseService> {
      protected S service;
