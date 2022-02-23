@@ -44,5 +44,6 @@ public class AuthUser extends Auditable {
     @Column(name = "role_id")
     private Long roleId;
 
+    @Column
     private Language language;
 }
