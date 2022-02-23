@@ -3,16 +3,17 @@ package uz.doston.springcrm.entity.auth;
 import lombok.Getter;
 import lombok.Setter;
 import uz.doston.springcrm.entity.Auditable;
-import uz.doston.springcrm.entity.organization.Organization;
 import uz.doston.springcrm.enums.Language;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
+@Table(schema = "auth")
 public class AuthUser extends Auditable {
 
     @Column(unique = true, nullable = false)
@@ -36,13 +37,9 @@ public class AuthUser extends Auditable {
     @Column
     private UUID code;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private List<Organization> organizations;
+    private Long organization_id;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private AuthRole role;
+    private Long role_id;
 
     private Language language;
 }

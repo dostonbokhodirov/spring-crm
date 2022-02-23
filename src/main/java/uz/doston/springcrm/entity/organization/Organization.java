@@ -4,16 +4,15 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.geo.Point;
 import uz.doston.springcrm.entity.Auditable;
-import uz.doston.springcrm.entity.auth.AuthUser;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @Entity
+@Table(schema = "organization")
 public class Organization extends Auditable {
 
     @Column(unique = true, nullable = false)
@@ -22,9 +21,7 @@ public class Organization extends Auditable {
     @Column
     private String logo;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id", nullable = false)
-    private AuthUser owner;
+    private Long owner_id;
 
     private String email;
 

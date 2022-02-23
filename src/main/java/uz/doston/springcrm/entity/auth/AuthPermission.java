@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@Table(schema = "auth")
 public class AuthPermission {
 
     @Id

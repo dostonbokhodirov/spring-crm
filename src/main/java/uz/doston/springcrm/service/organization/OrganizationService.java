@@ -1,5 +1,6 @@
 package uz.doston.springcrm.service.organization;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import uz.doston.springcrm.dto.organization.OrganizationCreateDto;
 import uz.doston.springcrm.dto.organization.OrganizationDto;
@@ -17,7 +18,7 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
         implements GenericCrudService<OrganizationCreateDto, OrganizationUpdateDto>,
         GenericService<OrganizationDto> {
 
-    public OrganizationService(OrganizationMapper mapper, OrganizationRepository repository) {
+    public OrganizationService(@Qualifier(value = "organizationMapper") OrganizationMapper mapper, OrganizationRepository repository) {
         super(mapper, repository);
     }
 
@@ -45,4 +46,5 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
     public OrganizationDto get(Long id) {
         return null;
     }
+
 }

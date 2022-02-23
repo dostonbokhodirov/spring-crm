@@ -4,12 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@Table(schema = "auth")
 public class AuthRole {
 
     @Id
@@ -24,8 +24,10 @@ public class AuthRole {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "auth_role_permissions",
+            schema = "auth",
+            name = "auth_role_permission",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id"))
     private List<AuthPermission> permissions;
+
 }
