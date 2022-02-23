@@ -25,4 +25,7 @@ public class AuthUserController extends AbstractController<AuthUserService> {
         return "auth/logout";
     }
 
+
+
+
 }
