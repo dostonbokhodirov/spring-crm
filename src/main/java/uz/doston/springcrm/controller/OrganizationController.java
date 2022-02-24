@@ -21,6 +21,7 @@ public class OrganizationController extends AbstractController<OrganizationServi
         return "organization/list";
     }
 
+
 //    public String deletePage(){
 //
 //    }
