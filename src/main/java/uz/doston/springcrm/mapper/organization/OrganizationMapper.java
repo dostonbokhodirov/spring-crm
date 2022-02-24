@@ -1,4 +1,4 @@
-package uz.doston.springcrm.mapper;
+package uz.doston.springcrm.mapper.organization;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -7,13 +7,13 @@ import uz.doston.springcrm.dto.organization.OrganizationCreateDto;
 import uz.doston.springcrm.dto.organization.OrganizationDto;
 import uz.doston.springcrm.dto.organization.OrganizationUpdateDto;
 import uz.doston.springcrm.entity.organization.Organization;
+import uz.doston.springcrm.mapper.BaseMapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
 @Component
+@Mapper(componentModel = "spring")
 public interface OrganizationMapper extends BaseMapper {
-
     OrganizationDto toDto(Organization organization);
 
     List<OrganizationDto> toDto(List<Organization> list);
@@ -23,5 +23,4 @@ public interface OrganizationMapper extends BaseMapper {
 
     @Mapping(target = "logo", ignore = true)
     Organization fromUpdateDto(OrganizationUpdateDto organizationUpdateDto);
-
 }

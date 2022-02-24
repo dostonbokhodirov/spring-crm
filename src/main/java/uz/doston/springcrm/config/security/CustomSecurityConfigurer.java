@@ -58,8 +58,7 @@ public class CustomSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 )
                 .authorizeRequests((authorizeRequests) ->
                         authorizeRequests
-                                .antMatchers(WHITE_LIST)
-                                .permitAll()
+                                .antMatchers(WHITE_LIST).permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )
@@ -68,8 +67,8 @@ public class CustomSecurityConfigurer extends WebSecurityConfigurerAdapter {
                                 .permitAll()
                                 .loginPage("/auth/login")
                                 .loginProcessingUrl("/auth/login")
-                                .usernameParameter("username")
-                                .passwordParameter("password")
+//                                .usernameParameter("username")
+//                                .passwordParameter("password")
                                 .defaultSuccessUrl("/", false)
                 )
                 .rememberMe((httpSecurityRememberMeConfigurer) ->
@@ -97,13 +96,19 @@ public class CustomSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        return daoAuthenticationProvider;
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.authenticationProvider(daoAuthenticationProvider());
+//
+//    }
+//
+//    public DaoAuthenticationProvider daoAuthenticationProvider() {
+//        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+//        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+//        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+//        return daoAuthenticationProvider;
+//    }
 }

@@ -1,11 +1,13 @@
 package uz.doston.springcrm.service.organization;
 
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import uz.doston.springcrm.dto.organization.OrganizationCreateDto;
 import uz.doston.springcrm.dto.organization.OrganizationDto;
 import uz.doston.springcrm.dto.organization.OrganizationUpdateDto;
+import uz.doston.springcrm.entity.organization.Logo;
 import uz.doston.springcrm.entity.organization.Organization;
-import uz.doston.springcrm.mapper.OrganizationMapper;
+import uz.doston.springcrm.mapper.organization.OrganizationMapper;
 import uz.doston.springcrm.repository.organization.OrganizationRepository;
 import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
@@ -18,8 +20,10 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
         implements GenericCrudService<OrganizationCreateDto, OrganizationUpdateDto>,
         GenericService<OrganizationDto> {
 
-    public OrganizationService(OrganizationMapper mapper, OrganizationRepository repository) {
+    private final OrganizationLogoService logoService;
+    public OrganizationService(OrganizationMapper mapper, OrganizationRepository repository, OrganizationLogoService logoService) {
         super(mapper, repository);
+        this.logoService = logoService;
     }
 
     @Override
@@ -28,15 +32,18 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
     }
 
     @Override
+    @SneakyThrows
     public void create(OrganizationCreateDto dto) {
-
+        Logo logo = logoService.create(dto.getLogo());
+        Organization organization = mapper.fromCreateDto(dto);
+        organization.setLogo(logo);
+        repository.save(organization);
     }
 
     @Override
     public void update(OrganizationUpdateDto organizationUpdateDto) {
 
     }
-
 
 
     @Override

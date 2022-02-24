@@ -16,22 +16,22 @@
 
 </head>
 <body>
-<div class="container">
+<div class="container" th:method="post">
 
     <div class="login-text">
         <h3>Create Organization</h3>
     </div>
 
     <div class="login-input">
-        <input type="text" placeholder="Name">
-        <input type="email" placeholder="Email">
-        <input type="file" placeholder="Logo">
-        <input type="text" placeholder="Location">
+        <input th:name="name" type="text" placeholder="Name">
+        <input th:name="email" type="email" placeholder="Email">
+<!--        <input th:name="logo" type="file" placeholder="Logo">-->
+        <input th:name="location" type="text" placeholder="Location">
     </div>
     <div class="goBack" id="link">
         <a href="#">Back</a>
         <div class="login-button" >
-            <button type="submit"M>Create</button>
+            <button type="submit">Create</button>
         </div>
     </div>
 

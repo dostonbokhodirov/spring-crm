@@ -5,9 +5,7 @@ import lombok.Setter;
 import org.springframework.data.geo.Point;
 import uz.doston.springcrm.entity.Auditable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -18,8 +16,9 @@ public class Organization extends Auditable {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @Column
-    private String logo;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "logo_id", nullable = false)
+    private Logo logo;
 
     @Column(name = "owner_id", nullable = false)
     private Long ownerId;
