@@ -186,7 +186,7 @@
         <h3>Login</h3>
         <p>Please login using account detail bellow.</p>
     </div>
-    <form th:action="@{/auth/admin}" th:method="POST">
+    <form name="f" th:action="@{/auth/login}" th:method="POST" onsubmit="validate()" >
         <div class="login-input">
             <input type="text" name="username" placeholder="Username">
             <div class="password">
