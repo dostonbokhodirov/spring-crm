@@ -31,10 +31,6 @@ public class OrganizationController extends AbstractController<OrganizationServi
         return "organization/list";
     }
 
-
-//    public String deletePage(){
-//
-//    }
     @GetMapping("create")
     public String createPage(Model model) {
 
@@ -51,7 +47,7 @@ public class OrganizationController extends AbstractController<OrganizationServi
 
     @GetMapping("update")
     public String updatePage(Model model) {
-        model.addAttribute("dto", new OrganizationCreateDto());
+        model.addAttribute("dto", new OrganizationUpdateDto());
         return "organization/create";
     }
 
