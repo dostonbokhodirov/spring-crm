@@ -13,7 +13,10 @@ import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
 import uz.doston.springcrm.service.base.GenericService;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service(value = "organizationService")
 public class OrganizationService extends AbstractService<OrganizationMapper, OrganizationRepository>
@@ -21,6 +24,7 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
         GenericService<OrganizationDto> {
 
     private final OrganizationLogoService logoService;
+
     public OrganizationService(OrganizationMapper mapper, OrganizationRepository repository, OrganizationLogoService logoService) {
         super(mapper, repository);
         this.logoService = logoService;
@@ -41,10 +45,17 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
     }
 
     @Override
-    public void update(OrganizationUpdateDto organizationUpdateDto) {
+    public void update(OrganizationUpdateDto dto) throws IOException {
 
+        Optional<Organization> organization = repository.findById(dto.getId());
+        mapper.fromUpdateDto(dto, organization.get());
+
+        if (Objects.nonNull((dto.getLogo()))) {
+            Logo logo = logoService.create(dto.getLogo());//TODO eski logoniyoqotish kerak filedan
+            organization.get().setLogo(logo);
+        }
+        repository.save(organization.get());
     }
-
 
     @Override
     public List<OrganizationDto> getAll() {

@@ -7,6 +7,7 @@ import uz.doston.springcrm.repository.BaseRepository;
 
 import java.util.Optional;
 
+@Repository
 public interface AuthUserRepository extends JpaRepository<AuthUser, Long>, BaseRepository {
     Optional<AuthUser> findByUsername(String username);
 }

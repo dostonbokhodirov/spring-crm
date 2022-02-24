@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import uz.doston.springcrm.dto.organization.OrganizationCreateDto;
-import uz.doston.springcrm.entity.organization.Logo;
-import uz.doston.springcrm.entity.organization.Organization;
+import uz.doston.springcrm.dto.organization.OrganizationUpdateDto;
 import uz.doston.springcrm.repository.organization.OrganizationRepository;
 import uz.doston.springcrm.service.organization.OrganizationLogoService;
 import uz.doston.springcrm.service.organization.OrganizationService;
@@ -47,6 +46,19 @@ public class OrganizationController extends AbstractController<OrganizationServi
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute(name = "dto") OrganizationCreateDto dto) {
         service.create(dto);
+        return "redirect:/";
+    }
+
+    @GetMapping("update")
+    public String updatePage(Model model) {
+        model.addAttribute("dto", new OrganizationCreateDto());
+        return "organization/create";
+    }
+
+    @SneakyThrows
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public String update(@Valid @ModelAttribute(name = "dto") OrganizationUpdateDto dto) {
+        service.update(dto);
         return "redirect:/";
     }
 }
