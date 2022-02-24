@@ -1,6 +1,5 @@
 package uz.doston.springcrm.service.organization;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import uz.doston.springcrm.dto.organization.OrganizationCreateDto;
 import uz.doston.springcrm.dto.organization.OrganizationDto;
@@ -29,7 +28,7 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
     }
 
     @Override
-    public void create(OrganizationCreateDto organizationCreateDto) {
+    public void create(OrganizationCreateDto dto) {
 
     }
 
@@ -37,6 +36,8 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
     public void update(OrganizationUpdateDto organizationUpdateDto) {
 
     }
+
+
 
     @Override
     public List<OrganizationDto> getAll() {
