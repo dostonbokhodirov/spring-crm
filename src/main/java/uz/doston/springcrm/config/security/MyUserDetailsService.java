@@ -19,5 +19,7 @@ public class MyUserDetailsService implements org.springframework.security.core.u
     public MyUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AuthUser user = authUserRepository.findAuthUserByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         return new MyUserDetails(user);
+
+
     }
 }

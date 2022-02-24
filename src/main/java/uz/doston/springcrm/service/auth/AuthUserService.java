@@ -1,6 +1,5 @@
 package uz.doston.springcrm.service.auth;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import uz.doston.springcrm.dto.auth.AuthUserCreateDto;
 import uz.doston.springcrm.dto.auth.AuthUserDto;
@@ -15,7 +14,7 @@ import java.util.List;
 
 @Service
 public class AuthUserService extends AbstractService<AuthUserMapper, AuthUserRepository>
-        implements GenericCrudService<AuthUserCreateDto, AuthUserUpdateDto>, GenericService<AuthUserDto> {
+        implements GenericCrudService<AuthUserDto, AuthUserCreateDto, AuthUserUpdateDto> {
 
     public AuthUserService(/*@Qualifier(value = "authUserMapper")*/ AuthUserMapper mapper, AuthUserRepository repository) {
         super(mapper, repository);

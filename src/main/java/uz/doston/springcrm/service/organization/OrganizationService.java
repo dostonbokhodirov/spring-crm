@@ -9,14 +9,12 @@ import uz.doston.springcrm.mapper.OrganizationMapper;
 import uz.doston.springcrm.repository.organization.OrganizationRepository;
 import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
-import uz.doston.springcrm.service.base.GenericService;
 
 import java.util.List;
 
 @Service
 public class OrganizationService extends AbstractService<OrganizationMapper, OrganizationRepository>
-        implements GenericCrudService<OrganizationCreateDto, OrganizationUpdateDto>,
-        GenericService<OrganizationDto> {
+        implements GenericCrudService<OrganizationDto, OrganizationCreateDto, OrganizationUpdateDto> {
 
     public OrganizationService(/*@Qualifier(value = "organizationMapper") */OrganizationMapper mapper, OrganizationRepository repository) {
         super(mapper, repository);

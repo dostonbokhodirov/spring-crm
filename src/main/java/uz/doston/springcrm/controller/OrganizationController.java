@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import uz.doston.springcrm.dto.organization.OrganizationCreateDto;
+import uz.doston.springcrm.dto.organization.OrganizationUpdateDto;
 import uz.doston.springcrm.service.organization.OrganizationService;
 
 @Controller
@@ -24,7 +25,7 @@ public class OrganizationController extends AbstractController<OrganizationServi
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public String create(@ModelAttribute OrganizationCreateDto dto) {
         service.create(dto);
-        return "redirect:/";
+        return "redirect:organization/list";
     }
 
     @GetMapping(value = "delete/{id}")
@@ -35,7 +36,7 @@ public class OrganizationController extends AbstractController<OrganizationServi
 
     @RequestMapping(value = "delete", method = RequestMethod.DELETE)
     public String delete() {
-        return "redirect:/";
+        return "redirect:organization/list";
     }
 
     @GetMapping(value = "update/{id}")
@@ -45,17 +46,18 @@ public class OrganizationController extends AbstractController<OrganizationServi
     }
 
     @RequestMapping(value = "update/{id}", method = RequestMethod.PATCH)
-    public String update(@PathVariable String id) {
-        return "redirect:/";
+    public String update(@ModelAttribute OrganizationUpdateDto dto, @PathVariable String id) {
+        service.update(dto);
+        return "redirect:organization/list";
     }
 
-    @GetMapping("detail/{id}")
+    @GetMapping(value = "detail/{id}")
     public String get(Model model, @PathVariable(name = "id") Long id) {
         return "organization/detail";
     }
 
 
-    @GetMapping("")
+    @GetMapping(value = "list")
     public String getAll(Model model) {
         model.addAttribute("organizations", service.getAll());
         return "organization/list";
