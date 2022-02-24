@@ -5,9 +5,7 @@ import lombok.Setter;
 import uz.doston.springcrm.entity.Auditable;
 import uz.doston.springcrm.enums.Language;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Getter
@@ -41,8 +39,9 @@ public class AuthUser extends Auditable {
     @Column(name = "organization_id")
     private Long organizationId;
 
-    @Column(name = "role_id")
-    private Long roleId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id", nullable = false)
+    private AuthRole role;
 
     @Column
     private Language language;
