@@ -2,28 +2,53 @@ package uz.doston.springcrm.config.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import uz.doston.springcrm.entity.auth.AuthRole;
 import uz.doston.springcrm.entity.auth.AuthUser;
+import uz.doston.springcrm.enums.Status;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class MyUserDetails implements org.springframework.security.core.userdetails.UserDetails {
+public class MyUserDetails implements UserDetails {
 
-    private Set<GrantedAuthority> authorities;
-    private final AuthUser authUser;
+    private final Long id;
 
-    public MyUserDetails(AuthUser authUser) {
-        this.authUser = authUser;
-        processAuthorities(authUser);
+    private final String username;
+
+    private final String password;
+
+    private final boolean enabled;
+
+    private final Status status;
+
+    private final String email;
+
+    private final Long organizationId;
+
+    private Set<SimpleGrantedAuthority> authorities;
+
+    public MyUserDetails(AuthUser user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.status = user.getStatus();
+        this.email = user.getEmail();
+        this.organizationId = user.getOrganizationId();
+        this.enabled = !user.isDeleted();
+        this.authorities = new HashSet<>();
+        processAuthorities(user.getRole());
     }
 
 
-    private void processAuthorities(AuthUser user) {
+    private void processAuthorities(AuthRole role) {
+//        if (Objects.nonNull(role)) authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
+//        List<AuthPermission> permissions = role.getPermissions();
+//        if (Objects.nonNull(permissions))
+//            authorities.addAll(permissions.stream().map(permission -> new SimpleGrantedAuthority(permission.getAuthority())).collect(Collectors.toSet()));
         authorities = new HashSet<>();
-        AuthRole role = user.getRole();
         if (Objects.isNull(role)) return;
         authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getCode()));
         if (Objects.isNull(role.getPermissions())) return;
@@ -32,36 +57,36 @@ public class MyUserDetails implements org.springframework.security.core.userdeta
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return authUser.getPassword();
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return authUser.getUsername();
+        return this.username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return this.status == Status.ACTIVE;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return this.enabled;
     }
 }
