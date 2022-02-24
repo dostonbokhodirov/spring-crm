@@ -43,7 +43,7 @@ public class SpringCrmApplication /* implements CommandLineRunner */ {
         admin.setAge(22);
         admin.setEmail("admin@mail.ru");
         AuthRole adminRole = authRoleRepository.findAuthRoleByCode("ADMIN").orElse(new AuthRole());
-        admin.setRoleId(adminRole.getId());
+        admin.setRole(adminRole);
         admin.setCode(UUID.randomUUID());
 
 
@@ -58,7 +58,7 @@ public class SpringCrmApplication /* implements CommandLineRunner */ {
         manager.setEmail("manager@mail.ru");
         manager.setCode(UUID.randomUUID());
         AuthRole managerRole = authRoleRepository.findAuthRoleByCode("MANAGER").orElse(new AuthRole());
-        manager.setRoleId(managerRole.getId());
+        manager.setRole(managerRole);
 
         authUserRepository.saveAll(List.of(admin, manager));
     }
