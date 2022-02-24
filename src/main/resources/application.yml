@@ -3,13 +3,15 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/spring_crm
     username: postgres
-    password: 19801980
+    password: iPhone0303
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
     open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
   messages:
     always-use-message-format: true
 server:
   port: 8080
+

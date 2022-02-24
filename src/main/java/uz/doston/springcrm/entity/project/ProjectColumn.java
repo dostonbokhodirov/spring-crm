@@ -27,8 +27,8 @@ public class ProjectColumn extends Auditable {
     @Column(name = "project_id")
     private Long projectId;
 
-    @Column(nullable = false, unique = true)
-    private Long order;
+    @Column(nullable = false, unique = true, name = "order_number")
+    private Long orderNumber;
 
     private Long iconId;
 

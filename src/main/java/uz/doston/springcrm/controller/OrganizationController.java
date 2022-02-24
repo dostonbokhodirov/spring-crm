@@ -28,9 +28,14 @@ public class OrganizationController extends AbstractController<OrganizationServi
     @GetMapping("")
     public String getAll(Model model) {
         model.addAttribute("organizations", service.getAll());
+//        return "organization/list";
         return "organization/list";
     }
 
+
+//    public String deletePage(){
+//
+//    }
     @GetMapping("create")
     public String createPage(Model model) {
 

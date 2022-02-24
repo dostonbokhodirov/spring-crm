@@ -186,54 +186,52 @@
         </div>
 
         <div class="login-input">
-            <input type="text" placeholder="Email Address">
+            <input type="text" name="username" placeholder="Username">
             <div class="password">
                 <i class="fas"></i>
                 <label>
                     <input type="password" placeholder="Password" class="InputPassword">
                 </label>
+                <input type="password" name="password" placeholder="Password" class="InputPassword">
             </div>
-           
+
             <div class="forgot">
                 <p>Forgot your password?</p>
-
                 <div>
                     <label>Remember Me</label>
-                    <input type="checkbox"> 
+                    <input type="checkbox">
                 </div>
-               
             </div>
-           
         </div>
-
         <div class="login-button">
             <button type="submit">Sign In</button>
             <p>Don’t have an Account?Create account</p>
         </div>
-    </div>
+    </form>
+</div>
 
-    <script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/main.js}"></script>
 
-    <script>
-        const passwordEye = document.querySelector(".fas")
-        const InputPassword = document.querySelector(".InputPassword")
-        
-        passwordEye.addEventListener('click', function() {
-            passwordEye.classList.toggle("fa-eye-slash")
-            passwordEye.classList.add("fa-eye")
-        
-            if (passwordEye.classList.value != "fas fa-eye fa-eye-slash") {
-                console.log("fa-eye")
-                InputPassword.type = "text"
-                 
-            } else {
-                InputPassword.type = "password"
-            }
-                      
-        })
-        passwordEye.classList.add("fa-eye-slash")
-      
-    </script>
+<script>
+    const passwordEye = document.querySelector(".fas")
+    const InputPassword = document.querySelector(".InputPassword")
+
+    passwordEye.addEventListener('click', function () {
+        passwordEye.classList.toggle("fa-eye-slash")
+        passwordEye.classList.add("fa-eye")
+
+        if (passwordEye.classList.value != "fas fa-eye fa-eye-slash") {
+            console.log("fa-eye")
+            InputPassword.type = "text"
+
+        } else {
+            InputPassword.type = "password"
+        }
+
+    })
+    passwordEye.classList.add("fa-eye-slash")
+
+</script>
 </body>
 
 </html>
