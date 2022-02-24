@@ -7,8 +7,8 @@ import uz.doston.springcrm.entity.organization.Organization;
 
 import java.util.List;
 
-@Component
 @Mapper(componentModel = "spring")
+@Component
 public interface OrganizationMapper extends BaseMapper {
 
     OrganizationDto toDto(Organization organization);
