@@ -1,6 +1,5 @@
 package uz.doston.springcrm;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -16,7 +15,7 @@ import java.util.UUID;
 
 @EnableJpaAuditing
 @SpringBootApplication
-public class SpringCrmApplication /* implements CommandLineRunner */ {
+public class SpringCrmApplication  /*implements CommandLineRunner*/  {
 
     private final AuthUserRepository authUserRepository;
     private final AuthRoleRepository authRoleRepository;

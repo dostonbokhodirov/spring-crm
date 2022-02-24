@@ -37,9 +37,9 @@ public class MyUserDetails implements UserDetails {
         this.status = user.getStatus();
         this.email = user.getEmail();
         this.organizationId = user.getOrganizationId();
-        this.enabled = !user.isDeleted();
+        this.enabled = true;
         this.authorities = new HashSet<>();
-        processAuthorities(user.getRole());
+//        processAuthorities(user.getRole());
     }
 
 
@@ -48,10 +48,11 @@ public class MyUserDetails implements UserDetails {
 //        List<AuthPermission> permissions = role.getPermissions();
 //        if (Objects.nonNull(permissions))
 //            authorities.addAll(permissions.stream().map(permission -> new SimpleGrantedAuthority(permission.getAuthority())).collect(Collectors.toSet()));
-        authorities = new HashSet<>();
         if (Objects.isNull(role)) return;
         authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getCode()));
+
         if (Objects.isNull(role.getPermissions())) return;
+
         role.getPermissions().forEach(permission -> authorities.add(new SimpleGrantedAuthority(permission.getCode())));
     }
 
@@ -77,7 +78,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.status == Status.ACTIVE;
+        return true;
     }
 
     @Override

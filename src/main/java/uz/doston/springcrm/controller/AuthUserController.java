@@ -2,9 +2,7 @@ package uz.doston.springcrm.controller;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import uz.doston.springcrm.service.auth.AuthUserService;
 
 @Controller
@@ -34,5 +32,9 @@ public class AuthUserController extends AbstractController<AuthUserService> {
     }
 
 
+    @GetMapping(value = "admin")
+    public String adminPage() {
+        return "../index";
+    }
 
 }
