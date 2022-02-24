@@ -20,13 +20,13 @@ public class ProjectController extends AbstractController<ProjectService> {
     @GetMapping(value = "create")
     public String createPage(Model model) {
         model.addAttribute("project", new ProjectCreateDto());
-        return "project/list";
+        return "project/create";
     }
 
-    @PostMapping(value = "")
+    @PostMapping(value = "create")
     public String create(@ModelAttribute ProjectCreateDto dto) {
         service.create(dto);
-        return "redirect:organization/list";
+        return "redirect:/project/list";
     }
 
     @GetMapping(value = "delete/{id}")
@@ -37,7 +37,7 @@ public class ProjectController extends AbstractController<ProjectService> {
 
     @RequestMapping(value = "delete", method = RequestMethod.DELETE)
     public String delete() {
-        return "redirect:project/list";
+        return "redirect:/project/list";
     }
 
     @GetMapping(value = "update/{id}")
@@ -49,10 +49,10 @@ public class ProjectController extends AbstractController<ProjectService> {
     @PostMapping(value = "update/{id}")
     public String update(@ModelAttribute ProjectUpdateDto dto, @PathVariable("id") Long id) {
         service.update(dto);
-        return "redirect:project/list";
+        return "redirect:/project/list";
     }
 
-    @GetMapping(value = "detail{id}")
+    @GetMapping(value = "detail/{id}")
     public String get(Model model, @PathVariable("id") Long id) {
         model.addAttribute("project", service.get(id));
         return "project/detail";
