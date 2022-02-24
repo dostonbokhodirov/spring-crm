@@ -24,6 +24,9 @@ public abstract class Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
+    private boolean active;
+
     @CreationTimestamp
     @Column(nullable = false)
     private Date createdAt;
