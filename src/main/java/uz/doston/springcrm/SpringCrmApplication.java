@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @EnableJpaAuditing
 @SpringBootApplication
-public class SpringCrmApplication /*implements CommandLineRunner*/ {
+public class SpringCrmApplication implements CommandLineRunner {
 
     private final AuthUserRepository authUserRepository;
     private final AuthRoleRepository authRoleRepository;
@@ -31,6 +31,9 @@ public class SpringCrmApplication /*implements CommandLineRunner*/ {
     public static void main(String[] args) {
         SpringApplication.run(SpringCrmApplication.class, args);
     }
+
+
+
 
     @Transactional(timeout = 10)
     public void run(String... args) throws Exception {
