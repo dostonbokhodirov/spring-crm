@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import uz.doston.springcrm.entity.Auditable;
 import uz.doston.springcrm.enums.Language;
+import uz.doston.springcrm.enums.Status;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -36,6 +37,9 @@ public class AuthUser extends Auditable {
     @Column
     private UUID code;
 
+    @Column
+    private Status status;
+
     @Column(name = "organization_id")
     private Long organizationId;
 
@@ -45,4 +49,7 @@ public class AuthUser extends Auditable {
 
     @Column
     private Language language;
+
+    @Column
+    private boolean deleted;
 }

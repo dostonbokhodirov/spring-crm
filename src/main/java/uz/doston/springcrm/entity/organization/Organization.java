@@ -33,7 +33,4 @@ public class Organization extends Auditable {
     @Column
     private Point location;
 
-    @Column
-    private Boolean isActive;
-
 }
