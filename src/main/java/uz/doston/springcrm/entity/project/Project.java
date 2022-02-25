@@ -17,6 +17,8 @@ import javax.persistence.Table;
 @Table(schema = "project")
 public class Project extends Auditable {
 
+
+
     @Column(nullable = false)
     private String name;
 

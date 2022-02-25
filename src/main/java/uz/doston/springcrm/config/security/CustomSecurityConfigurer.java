@@ -13,7 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.annotation.PostConstruct;
+import java.net.http.HttpRequest;
 import java.util.concurrent.TimeUnit;
+
+import static org.springframework.http.HttpMethod.POST;
 
 
 @Configuration
@@ -23,7 +26,7 @@ public class CustomSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 
     public static final String[] WHITE_LIST = {"/auth/login", "/error"};
-    public static final String[] WHITE_LIST_RESOURCE = {"/webjars/**", "/css/*", "/js/*", "/img/**"};
+    public static final String[] WHITE_LIST_RESOURCE = {"/webjars/**", "/css/**", "/js/**", "/img/**"};
 //    @Value(value = "${remember.me.token.key}")
 //    private String rememberMeTokenKey;
 //
@@ -58,8 +61,8 @@ public class CustomSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 )
                 .authorizeRequests((authorizeRequests) ->
                         authorizeRequests
-                                .antMatchers(WHITE_LIST)
-                                .permitAll()
+                                .antMatchers(WHITE_LIST).permitAll()
+                                .antMatchers(POST, WHITE_LIST).permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )

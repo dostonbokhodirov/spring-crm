@@ -52,7 +52,7 @@
 //        return "redirect:project/list";
 //    }
 //
-//    @GetMapping(value = "detail{id}")
+//    @GetMapping(value = "detail/{id}")
 //    public String get(Model model, @PathVariable("id") Long id) {
 //        model.addAttribute("project", service.get(id));
 //        return "project/detail";
@@ -64,4 +64,10 @@
 //        return "project/list";
 //    }
 //
+//
+//    @GetMapping(value = "{id}/task/list")
+//    public String getTasksList(@PathVariable("id") Long id,Model model) {
+//        model.addAttribute("tasks",service.getAllTasks(id));
+//        return "task/index2";
+//    }
 //}

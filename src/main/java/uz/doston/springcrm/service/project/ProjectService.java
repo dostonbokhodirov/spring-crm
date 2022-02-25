@@ -4,14 +4,20 @@ import org.springframework.stereotype.Service;
 import uz.doston.springcrm.dto.project.ProjectCreateDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
 import uz.doston.springcrm.entity.project.Project;
+import uz.doston.springcrm.entity.task.Task;
 import uz.doston.springcrm.mapper.ProjectMapper;
 import uz.doston.springcrm.repository.ProjectRepository;
+import uz.doston.springcrm.repository.task.TaskRepository;
 import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
 
+import java.util.List;
+
 @Service
 public class ProjectService extends AbstractService<ProjectMapper, ProjectRepository>
-        implements GenericCrudService< ProjectCreateDto, ProjectUpdateDto> {
+        implements GenericCrudService<ProjectCreateDto, ProjectUpdateDto> {
+
+    private TaskRepository taskRepository;
 
     public ProjectService(ProjectMapper mapper, ProjectRepository repository) {
         super(mapper, repository);
@@ -33,6 +39,12 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
         Project project = mapper.fromUpdateDto(projectUpdateDto);
         repository.save(project);
     }
+
+
+    public List<Task> getAllTasks(Long id) {
+       return taskRepository.findAllByProjectId(id);
+    }
+
 
 //    @Override
 //    public List<ProjectDto> getAll() {

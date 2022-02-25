@@ -16,13 +16,16 @@ import java.util.UUID;
 
 @EnableJpaAuditing
 @SpringBootApplication
-public class SpringCrmApplication /* implements CommandLineRunner */ {
+public class SpringCrmApplication  /*implements CommandLineRunner*/  {
 
     private final AuthUserRepository authUserRepository;
     private final AuthRoleRepository authRoleRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public SpringCrmApplication(AuthUserRepository authUserRepository, AuthRoleRepository authRoleRepository, PasswordEncoder passwordEncoder) {
+    public SpringCrmApplication(
+            AuthUserRepository authUserRepository,
+            AuthRoleRepository authRoleRepository,
+            PasswordEncoder passwordEncoder) {
         this.authUserRepository = authUserRepository;
         this.authRoleRepository = authRoleRepository;
         this.passwordEncoder = passwordEncoder;
