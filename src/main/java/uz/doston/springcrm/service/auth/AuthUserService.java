@@ -22,11 +22,11 @@ import java.util.UUID;
 public class AuthUserService extends AbstractService<AuthUserMapper, AuthUserRepository>
         implements GenericCrudService<AuthUserCreateDto, AuthUserUpdateDto> {
 
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
 
-    public AuthUserService(AuthUserMapper mapper, AuthUserRepository repository, PasswordEncoder passwordEncoder) {
+    public AuthUserService(AuthUserMapper mapper, AuthUserRepository repository/*, PasswordEncoder passwordEncoder*/) {
         super(mapper, repository);
-        this.passwordEncoder = passwordEncoder;
+//        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -76,7 +76,7 @@ public class AuthUserService extends AbstractService<AuthUserMapper, AuthUserRep
         authRole.setCode(role);
         authRole.setPermissions(permissions);
         authUser.setRole(authRole);
-        authUser.setPassword(passwordEncoder.encode(authUser.getPassword()));
+//        authUser.setPassword(passwordEncoder.encode(authUser.getPassword()));
         authUser.setCode(UUID.randomUUID());
         repository.save(authUser);
     }

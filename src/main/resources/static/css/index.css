@@ -5,6 +5,15 @@
   font-family: Rubik;
 }
 
+.qwerty:hover{
+  cursor: pointer;
+}
+
+.box:hover{
+  cursor: pointer;
+  /*background-color: #67cb65;*/
+}
+
 header {
   display: grid;
   grid-template-columns: 300px 1fr;

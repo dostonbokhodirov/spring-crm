@@ -30,7 +30,6 @@ public class Task extends Auditable {
             inverseJoinColumns = @JoinColumn(name = "project_member_id"))
     private List<ProjectMember> projectMembers;
 
-
     @Column(nullable = false)
     private Long projectId;
 
