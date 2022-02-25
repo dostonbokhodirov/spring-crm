@@ -1,6 +1,5 @@
 package uz.doston.springcrm.dto.auth;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import uz.doston.springcrm.dto.BaseGenericDto;
@@ -15,7 +14,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@Builder(builderMethodName = "childBuilder")
 public class AuthUserDto extends BaseGenericDto {
 
     private String username;

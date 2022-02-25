@@ -1,7 +1,10 @@
 package uz.doston.springcrm.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
+import uz.doston.springcrm.dto.auth.AuthUserCreateDto;
+import uz.doston.springcrm.entity.auth.AuthUser;
 import uz.doston.springcrm.dto.auth.AuthUserDto;
 import uz.doston.springcrm.entity.auth.AuthUser;
 
@@ -15,4 +18,7 @@ public interface AuthUserMapper extends BaseMapper {
 
     List<AuthUserDto> toDto(List<AuthUser> authUsers);
 
+
+    @Mapping(target = "role", ignore = true)
+    AuthUser fromCreateDto(AuthUserCreateDto dto);
 }

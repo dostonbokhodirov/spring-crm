@@ -82,7 +82,7 @@ public class ProjectController extends AbstractController<ProjectService> {
         return "redirect:project/list";
     }
 
-    @GetMapping(value = "detail/{id}")
+    @PostMapping(value = "detail/{id}")
     public String get(Model model, @PathVariable("id") Long id) {
         model.addAttribute("project", service.get(id));
         return "project/detail";
