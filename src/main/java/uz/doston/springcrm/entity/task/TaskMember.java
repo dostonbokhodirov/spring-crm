@@ -3,9 +3,7 @@ package uz.doston.springcrm.entity.task;
 import lombok.Getter;
 import lombok.Setter;
 import uz.doston.springcrm.entity.auth.AuthUser;
-import uz.doston.springcrm.entity.project.Project;
 import uz.doston.springcrm.entity.project.ProjectColumn;
-import uz.doston.springcrm.entity.project.ProjectMember;
 
 import javax.persistence.*;
 
@@ -20,8 +18,8 @@ public class TaskMember {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name="member_id", nullable=false)
-    private ProjectMember member;
+    @JoinColumn(name="user_id", nullable=false)
+    private AuthUser userId;
 
     @OneToOne
     @JoinColumn(name = "project_column_id",nullable = false)

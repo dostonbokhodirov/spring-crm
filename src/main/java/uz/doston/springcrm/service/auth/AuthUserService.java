@@ -1,14 +1,14 @@
 package uz.doston.springcrm.service.auth;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.doston.springcrm.dto.auth.AuthUserCreateDto;
+import uz.doston.springcrm.dto.auth.AuthUserDto;
 import uz.doston.springcrm.dto.auth.AuthUserUpdateDto;
 import uz.doston.springcrm.entity.auth.AuthPermission;
 import uz.doston.springcrm.entity.auth.AuthRole;
 import uz.doston.springcrm.entity.auth.AuthUser;
 import uz.doston.springcrm.enums.AuthPermissionType;
-import uz.doston.springcrm.mapper.AuthUserMapper;
+import uz.doston.springcrm.mapper.auth.AuthUserMapper;
 import uz.doston.springcrm.repository.auth.AuthUserRepository;
 import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
