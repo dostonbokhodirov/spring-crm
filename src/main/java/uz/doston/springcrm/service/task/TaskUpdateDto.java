@@ -1,4 +1,4 @@
-package uz.doston.springcrm.dto.auth;
+package uz.doston.springcrm.service.task;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,6 +6,6 @@ import uz.doston.springcrm.dto.BaseGenericDto;
 
 @Getter
 @Setter
-public class AuthUserDto extends BaseGenericDto {
+public class TaskUpdateDto extends BaseGenericDto {
 
 }

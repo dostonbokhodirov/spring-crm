@@ -20,7 +20,7 @@ import javax.validation.Valid;
 @RequestMapping(value = "/organization/*")
 public class OrganizationController extends AbstractController<OrganizationService> {
 
-    public OrganizationController(OrganizationService service, OrganizationLogoService logoService, OrganizationRepository organizationRepository) {
+    public OrganizationController(OrganizationService service) {
         super(service);
     }
 

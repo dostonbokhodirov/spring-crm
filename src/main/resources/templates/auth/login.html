@@ -149,6 +149,7 @@
                 padding: 0;
                 width: 300px;
             }
+
             .login-input input {
                 width: 100%;
             }
@@ -166,16 +167,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Red+Hat+Display&display=swap"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Red+Hat+Display&display=swap"
+            rel="stylesheet">
 
-        <!-- font awesome link -->
+    <!-- font awesome link -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
-    <div class="container">
+<div class="container">
+    <form>
         <div class="goBack" id="link">
             <a href="#">Back</a>
             <a th:href="@{/auth/register}">Register</a>
@@ -186,20 +188,26 @@
         </div>
 
         <div class="login-input">
-            <input type="text" name="username" placeholder="Username">
+            <label>
+                <input type="text" name="username" placeholder="Username">
+            </label>
             <div class="password">
                 <i class="fas"></i>
                 <label>
                     <input type="password" placeholder="Password" class="InputPassword">
                 </label>
-                <input type="password" name="password" placeholder="Password" class="InputPassword">
+                <label>
+                    <input type="password" name="password" placeholder="Password" class="InputPassword">
+                </label>
             </div>
 
             <div class="forgot">
                 <p>Forgot your password?</p>
                 <div>
                     <label>Remember Me</label>
-                    <input type="checkbox">
+                    <label>
+                        <input type="checkbox">
+                    </label>
                 </div>
             </div>
         </div>
