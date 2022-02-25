@@ -1,10 +1,15 @@
 package uz.doston.springcrm.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
+import uz.doston.springcrm.dto.organization.OrganizationCreateDto;
+import uz.doston.springcrm.dto.organization.OrganizationDto;
+import uz.doston.springcrm.dto.organization.OrganizationUpdateDto;
 import uz.doston.springcrm.dto.project.ProjectCreateDto;
 import uz.doston.springcrm.dto.project.ProjectDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
+import uz.doston.springcrm.entity.organization.Organization;
 import uz.doston.springcrm.entity.project.Project;
 
 import java.util.List;
@@ -20,4 +25,5 @@ public interface ProjectMapper extends BaseMapper {
     Project fromCreateDto(ProjectCreateDto projectCreateDto);
 
     Project fromUpdateDto(ProjectUpdateDto projectUpdateDto);
+
 }

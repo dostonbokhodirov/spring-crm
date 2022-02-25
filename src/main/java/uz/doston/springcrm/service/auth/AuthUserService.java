@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import uz.doston.springcrm.dto.auth.AuthUserCreateDto;
 import uz.doston.springcrm.dto.auth.AuthUserDto;
 import uz.doston.springcrm.dto.auth.AuthUserUpdateDto;
+import uz.doston.springcrm.entity.auth.AuthUser;
 import uz.doston.springcrm.mapper.AuthUserMapper;
 import uz.doston.springcrm.repository.auth.AuthUserRepository;
 import uz.doston.springcrm.service.base.AbstractService;
@@ -14,9 +15,9 @@ import java.util.List;
 
 @Service
 public class AuthUserService extends AbstractService<AuthUserMapper, AuthUserRepository>
-        implements GenericCrudService< AuthUserCreateDto, AuthUserUpdateDto> {
+        implements GenericCrudService<AuthUserCreateDto, AuthUserUpdateDto> {
 
-    public AuthUserService( AuthUserMapper mapper, AuthUserRepository repository) {
+    public AuthUserService(AuthUserMapper mapper, AuthUserRepository repository) {
         super(mapper, repository);
     }
 
@@ -33,6 +34,12 @@ public class AuthUserService extends AbstractService<AuthUserMapper, AuthUserRep
     @Override
     public void update(AuthUserUpdateDto authUserUpdateDto) {
 
+    }
+
+    public List<AuthUserDto> getAllUsers(List<Long> membersId) {
+
+        List<AuthUser> allById = repository.findAllById(membersId);
+        return mapper.toDto(allById);
     }
 
 
