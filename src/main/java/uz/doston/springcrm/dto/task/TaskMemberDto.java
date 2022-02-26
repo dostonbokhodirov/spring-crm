@@ -3,19 +3,16 @@ package uz.doston.springcrm.dto.task;
 
 import lombok.Getter;
 import lombok.Setter;
-import uz.doston.springcrm.dto.auth.AuthUserDto;
-
-import java.util.List;
+import uz.doston.springcrm.dto.BaseGenericDto;
 
 @Getter
 @Setter
-public class TaskMemberDto {
+public class TaskMemberDto extends BaseGenericDto {
 
-    private Long id;
-
-    private List<AuthUserDto> users;
-
-    private Long memberId;//project_member_id
+    private Long userId;
 
     private Long projectColumnId;
+
+    private Long taskId;
+
 }

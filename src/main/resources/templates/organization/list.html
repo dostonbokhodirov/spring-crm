@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragment.html :: header('Organizations')"></head>
+<head th:include="fragment.html :: header('Organizations')">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</head>
 <body class="myb">
 <section th:include="fragment.html :: navbar"></section>
 
@@ -12,14 +15,21 @@
             <tr>
                 <th>#</th>
                 <th>Name</th>
+                <th>location</th>
+                <th>logo</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="organization,iter : ${organizations}">
                 <td th:text="${iter.count}"></td>
                 <td th:text="${organization.name}"></td>
+                <td><a href="#" class='fas fa-map-marker-alt' style='font-size:24px'>📍</a></td>
+                <td>
+                        <img width="100%" alt="image" th:src="${organization.logoPath}">
+                </td>
             </tr>
             </tbody>
+            <img src="../../logo/da38d302-a5a8-4855-a19d-de21ec6e1345.jpg" height="101" width="1038"/>
         </table>
         <a th:href="@{/organization/create}" class="btn btn-success">➕ New Organization</a>
     </div>

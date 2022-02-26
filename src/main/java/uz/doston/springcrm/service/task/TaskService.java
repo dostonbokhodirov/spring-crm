@@ -2,8 +2,11 @@ package uz.doston.springcrm.service.task;
 
 import org.springframework.stereotype.Service;
 import uz.doston.springcrm.dto.task.TaskCreateDto;
-import uz.doston.springcrm.mapper.TaskMapper;
-import uz.doston.springcrm.repository.TaskRepository;
+import uz.doston.springcrm.dto.task.TaskDto;
+import uz.doston.springcrm.dto.task.TaskUpdateDto;
+import uz.doston.springcrm.entity.task.Task;
+import uz.doston.springcrm.mapper.task.TaskMapper;
+import uz.doston.springcrm.repository.task.TaskRepository;
 import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
 import uz.doston.springcrm.service.base.GenericService;
@@ -21,6 +24,9 @@ public class TaskService extends AbstractService<TaskMapper, TaskRepository> imp
     public List<TaskDto> getAllTasks(Long id) {
         List<Task> tasks = repository.findAllByProjectId(id);
         return mapper.toDto(tasks);
+    }
+
+
     @Override
     public void delete(Long id) {
 

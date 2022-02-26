@@ -3,7 +3,7 @@ package uz.doston.springcrm.service.project;
 import org.springframework.stereotype.Service;
 import uz.doston.springcrm.dto.column.ProjectColumnDto;
 import uz.doston.springcrm.entity.project.ProjectColumn;
-import uz.doston.springcrm.mapper.ProjectColumnMapper;
+import uz.doston.springcrm.mapper.project.ProjectColumnMapper;
 import uz.doston.springcrm.repository.column.ProjectColumnRepository;
 import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericService;

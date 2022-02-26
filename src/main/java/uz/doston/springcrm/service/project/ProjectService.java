@@ -7,26 +7,19 @@ import uz.doston.springcrm.dto.project.ProjectCreateDto;
 import uz.doston.springcrm.dto.project.ProjectDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
 import uz.doston.springcrm.dto.task.TaskDto;
+import uz.doston.springcrm.dto.task.TaskMemberDto;
 import uz.doston.springcrm.entity.project.Project;
-import uz.doston.springcrm.entity.project.ProjectColumn;
-import uz.doston.springcrm.entity.task.Task;
 import uz.doston.springcrm.entity.task.TaskMember;
-import uz.doston.springcrm.mapper.AuthUserMapper;
-import uz.doston.springcrm.mapper.ProjectColumnMapper;
-import uz.doston.springcrm.mapper.ProjectMapper;
-import uz.doston.springcrm.mapper.task.TaskMapper;
+import uz.doston.springcrm.mapper.project.ProjectMapper;
+import uz.doston.springcrm.mapper.project.ProjectMemberMapper;
 import uz.doston.springcrm.mapper.task.TaskMemberMapper;
 import uz.doston.springcrm.repository.project.ProjectMemberRepository;
 import uz.doston.springcrm.repository.project.ProjectRepository;
-import uz.doston.springcrm.repository.auth.AuthUserRepository;
-import uz.doston.springcrm.repository.column.ProjectColumnRepository;
 import uz.doston.springcrm.repository.task.TaskMemberRepository;
-import uz.doston.springcrm.repository.task.TaskRepository;
 import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
 import uz.doston.springcrm.service.base.GenericService;
 
-import javax.swing.event.ListSelectionEvent;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,44 +27,23 @@ import java.util.Objects;
 public class ProjectService extends AbstractService<ProjectMapper, ProjectRepository>
         implements GenericCrudService<ProjectCreateDto, ProjectUpdateDto>, GenericService<ProjectDto> {
 
-    private TaskRepository taskRepository;
-    private TaskMapper taskMapper;
-
-    private ProjectColumnRepository columnRepository;
-    private ProjectColumnMapper columnMapper;
 
     private TaskMemberRepository taskMemberRepository;
     private TaskMemberMapper taskMemberMapper;
 
-    private AuthUserRepository userRepository;
-    private AuthUserMapper userMapper;
-
-
     private ProjectMemberRepository projectMemberRepository;
+    private ProjectMemberMapper projectMemberMapper;
 
 
     public ProjectService(ProjectMapper mapper,
                           ProjectRepository repository,
                           ProjectMemberRepository projectMemberRepository,
-                          TaskRepository taskRepository,
-                          ProjectColumnRepository columnRepository,
-                          ProjectColumnMapper columnMapper,
-                          TaskMapper taskMapper,
                           TaskMemberRepository taskMemberRepository,
-                          TaskMemberMapper taskMemberMapper,
-                          AuthUserRepository userRepository,
-                          AuthUserMapper userMapper) {
+                          TaskMemberMapper taskMemberMapper) {
         super(mapper, repository);
         this.projectMemberRepository = projectMemberRepository;
-        this.taskRepository = taskRepository;
-        this.columnRepository = columnRepository;
-        this.columnMapper = columnMapper;
-        this.taskMapper = taskMapper;
         this.taskMemberRepository = taskMemberRepository;
         this.taskMemberMapper = taskMemberMapper;
-
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
     }
 
     @Override
@@ -102,30 +74,58 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
     }
 
 
-    public List<ProjectColumnDto> getAllColumns(Long id, List<AuthUserDto> userDtos) {
-        List<ProjectColumn> columns = columnRepository.findProjectColumnsByProjectId(id);
-        List<ProjectColumnDto> columnDtos = columnMapper.toDto(columns);
+    public List<ProjectColumnDto> getAllColumns(Long id, List<AuthUserDto> userDtos, List<TaskDto> taskDtos, List<ProjectColumnDto> columnDtos) {
 
+        for (ProjectColumnDto columnDto : columnDtos) {
+            List<TaskMember> taskMembersId = taskMemberRepository.findAllByProjectColumnId(columnDto.getId());
+            List<TaskMemberDto> taskMemberDtos = taskMemberMapper.toDto(taskMembersId);
 
-
-        List<Long> taskMembersId = taskMemberRepository.findAllByProjectColumnId()
-
-        List<Task> tasks = taskRepository.findAllByProjectId(id);
-        List<TaskDto> taskDtos = taskMapper.toDto(tasks);
-
-
-//        taskMemberRepository.fi
-
-        for (TaskDto taskDto : taskDtos) {
-
-
-//            for (AuthUserDto userDto : userDtos) {
-//                if ()
-//            }
+            for (TaskMemberDto taskMember : taskMemberDtos) {
+                for (AuthUserDto userDto : userDtos) {
+                    for (TaskDto taskDto : taskDtos) {
+                        if (taskMember.getUserId().equals(userDto.getId()) && taskDto.getId().equals(taskMember.getTaskId())) {
+                            if (Objects.isNull(taskDto.getUsers())){
+                                taskDto.setUsers(List.of(userDto));
+                            }
+                            else {
+                                taskDto.getUsers().add(userDto);
+                            }
+                        }
+                    }
+                }
+            }
 
         }
 
-//        List<TaskMember> members =
+
+//        for (ProjectColumnDto columnDto : columnDtos) {
+//            List<TaskMember> taskMembersId = taskMemberRepository.findAllByProjectColumnId(columnDto.getId());
+//            List<TaskMemberDto> taskMemberDtos = taskMemberMapper.toDto(taskMembersId);
+//
+//
+//
+//            for (TaskMemberDto taskMemberDto : taskMemberDtos) {
+//                for (ProjectMemberDto projectMemberDto : projectMemberDtos) {
+//                    for (AuthUserDto userDto : userDtos) {
+//                        if (taskMemberDto.getMemberId().equals(projectMemberDto.getId()) && projectMemberDto.getUserId().equals(userDto.getId())) {
+//
+//                            for (TaskDto taskDto : taskDtos) {
+//                                if (Objects.isNull(taskDto.getUsers())) {
+//                                    taskDto.setUsers(List.of(userDto));
+//                                }
+//                                else {
+//                                    taskDto.getUsers().add(userDto);
+//                                }
+//                            }
+//
+//                        }
+//                    }
+//
+//                }
+//
+//            }
+//
+//        }
 
 
         for (ProjectColumnDto projectColumnDto : columnDtos) {
@@ -141,8 +141,7 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
         }
 
 
-        List<TaskMember> members = taskMemberRepository.
-        return columnMapper.toDto(columns);
+        return columnDtos;
     }
 
 

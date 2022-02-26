@@ -1,4 +1,4 @@
-package uz.doston.springcrm.mapper;
+package uz.doston.springcrm.mapper.auth;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -7,6 +7,7 @@ import uz.doston.springcrm.dto.auth.AuthUserCreateDto;
 import uz.doston.springcrm.entity.auth.AuthUser;
 import uz.doston.springcrm.dto.auth.AuthUserDto;
 import uz.doston.springcrm.entity.auth.AuthUser;
+import uz.doston.springcrm.mapper.BaseMapper;
 
 import java.util.List;
 

@@ -4,6 +4,7 @@ package uz.doston.springcrm.controller;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,6 @@ public class OrganizationController extends AbstractController<OrganizationServi
     @GetMapping("")
     public String getAll(Model model) {
         model.addAttribute("organizations", service.getAll());
-//        return "organization/list";
         return "organization/list";
     }
 
@@ -40,9 +40,13 @@ public class OrganizationController extends AbstractController<OrganizationServi
 
     @SneakyThrows
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute(name = "dto") OrganizationCreateDto dto) {
-        service.create(dto);
-        return "redirect:/";
+    public String create(@Valid @ModelAttribute(name = "dto") OrganizationCreateDto dto, BindingResult bindingResult) {
+            service.create(dto);
+        if (bindingResult.hasErrors()) {
+            return "organization/create";
+        }
+
+        return "organization/list";
     }
 
     @GetMapping("update")
@@ -53,8 +57,11 @@ public class OrganizationController extends AbstractController<OrganizationServi
 
     @SneakyThrows
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute(name = "dto") OrganizationUpdateDto dto) {
+    public String update(@Valid @ModelAttribute(name = "dto") OrganizationUpdateDto dto, BindingResult bindingResult) {
         service.update(dto);
-        return "redirect:/";
+        if (bindingResult.hasErrors()) {
+            return "organization/update";
+        }
+        return "organization/list";
     }
 }

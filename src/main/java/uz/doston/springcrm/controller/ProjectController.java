@@ -1,29 +1,19 @@
 package uz.doston.springcrm.controller;
 
 
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import uz.doston.springcrm.dto.auth.AuthUserCreateDto;
 import uz.doston.springcrm.dto.auth.AuthUserDto;
 import uz.doston.springcrm.dto.column.ProjectColumnDto;
 import uz.doston.springcrm.dto.project.ProjectCreateDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
 import uz.doston.springcrm.dto.task.TaskDto;
-import uz.doston.springcrm.entity.project.ProjectColumn;
-import uz.doston.springcrm.entity.project.ProjectMember;
-import uz.doston.springcrm.mapper.AuthUserMapper;
-import uz.doston.springcrm.mapper.ProjectColumnMapper;
-import uz.doston.springcrm.mapper.task.TaskMapper;
-import uz.doston.springcrm.mapper.task.TaskMemberMapper;
-import uz.doston.springcrm.repository.auth.AuthUserRepository;
-import uz.doston.springcrm.repository.column.ProjectColumnRepository;
-import uz.doston.springcrm.repository.task.TaskMemberRepository;
-import uz.doston.springcrm.repository.task.TaskRepository;
+import uz.doston.springcrm.dto.task.TaskMemberDto;
 import uz.doston.springcrm.service.auth.AuthUserService;
 import uz.doston.springcrm.service.project.ProjectColumnService;
 import uz.doston.springcrm.service.project.ProjectService;
+import uz.doston.springcrm.service.task.TaskMemberService;
 import uz.doston.springcrm.service.task.TaskService;
 
 import java.util.List;
@@ -36,15 +26,18 @@ public class ProjectController extends AbstractController<ProjectService> {
     private TaskService taskService;
     private ProjectColumnService columnService;
 
+    private TaskMemberService taskMemberService;
 
     public ProjectController(ProjectService service,
                              AuthUserService userService,
                              TaskService taskService,
-                             ProjectColumnService columnService) {
+                             ProjectColumnService columnService,
+                             TaskMemberService taskMemberService) {
         super(service);
         this.userService = userService;
         this.taskService = taskService;
         this.columnService = columnService;
+        this.taskMemberService = taskMemberService;
     }
 
     @GetMapping(value = "create")
@@ -97,22 +90,12 @@ public class ProjectController extends AbstractController<ProjectService> {
     @RequestMapping(value = "{id}/column/list")
     public String getAllColumns(@PathVariable("id") Long id, Model model) {
         List<ProjectColumnDto> allColumns = columnService.getAllColumns(id);
-
         List<TaskDto> allTasks = taskService.getAllTasks(id);
-
-
-
         List<Long> membersId = service.getMembersId(id);
-
-
-
         List<AuthUserDto> allUsers = userService.getAllUsers(membersId);
 
-
         model.addAttribute("project", service.get(id));
-
-        model.addAttribute("columns", service.getAllColumns(id,allUsers));
-
+        model.addAttribute("columns", service.getAllColumns(id, allUsers,allTasks,allColumns));
 
         return "task/index2";
     }

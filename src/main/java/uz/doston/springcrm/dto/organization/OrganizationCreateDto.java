@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
+//@Builder
 @NoArgsConstructor
 public class OrganizationCreateDto implements BaseDto {
 
