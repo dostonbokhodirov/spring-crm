@@ -148,8 +148,7 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
     @Override
     public List<ProjectDto> getAll() {
         List<Project> projects = repository.findAll();
-        List<ProjectDto> dtoList = mapper.toDto(projects);
-        return dtoList;
+        return mapper.toDto(projects);
     }
 
     @Override
