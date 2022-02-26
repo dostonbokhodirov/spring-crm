@@ -25,4 +25,5 @@ public interface OrganizationMapper extends BaseMapper {
 
     @Mapping(target = "logo", ignore = true)
     Organization fromUpdateDto(OrganizationUpdateDto organizationUpdateDto, @MappingTarget Organization organization);
+
 }

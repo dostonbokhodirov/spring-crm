@@ -44,7 +44,6 @@ public class AuthUser extends Auditable {
     private Long organizationId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id", nullable = false)
     private AuthRole role;
 
     @Column

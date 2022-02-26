@@ -20,7 +20,7 @@ public class OrganizationUpdateDto extends BaseGenericDto {
     @Size(min = 1,max = 30,message = "value for title must be between {min} and {max}")
     private String name;
 
-//    @NotNull(message = "Please input logo")
+    //    @NotNull(message = "Please input logo")
     private MultipartFile logo;
 
     private String code;

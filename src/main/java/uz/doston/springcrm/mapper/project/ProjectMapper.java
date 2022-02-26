@@ -1,4 +1,4 @@
-package uz.doston.springcrm.mapper;
+package uz.doston.springcrm.mapper.project;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,6 +11,7 @@ import uz.doston.springcrm.dto.project.ProjectDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
 import uz.doston.springcrm.entity.organization.Organization;
 import uz.doston.springcrm.entity.project.Project;
+import uz.doston.springcrm.mapper.BaseMapper;
 
 import java.util.List;
 

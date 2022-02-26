@@ -1,6 +1,5 @@
 package uz.doston.springcrm;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,16 +18,15 @@ import java.util.UUID;
 @SpringBootApplication
 public class SpringCrmApplication /*implements CommandLineRunner*/ {
 
-//    private final AuthUserRepository authUserRepository;
-//    private final AuthRoleRepository authRoleRepository;
-//
+    private final AuthUserRepository authUserRepository;
+    private final AuthRoleRepository authRoleRepository;
 //    private final PasswordEncoder passwordEncoder;
-//
-//    public SpringCrmApplication(AuthUserRepository authUserRepository, AuthRoleRepository authRoleRepository, PasswordEncoder passwordEncoder) {
-//        this.authUserRepository = authUserRepository;
-//        this.authRoleRepository = authRoleRepository;
+
+    public SpringCrmApplication(AuthUserRepository authUserRepository, AuthRoleRepository authRoleRepository/*, PasswordEncoder passwordEncoder*/) {
+        this.authUserRepository = authUserRepository;
+        this.authRoleRepository = authRoleRepository;
 //        this.passwordEncoder = passwordEncoder;
-//    }
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(SpringCrmApplication.class, args);

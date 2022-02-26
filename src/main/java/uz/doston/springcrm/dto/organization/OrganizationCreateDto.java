@@ -8,7 +8,6 @@ import org.springframework.data.geo.Point;
 import org.springframework.web.multipart.MultipartFile;
 import uz.doston.springcrm.dto.BaseDto;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 

@@ -1,5 +1,6 @@
 //package uz.doston.springcrm.config.security;
 //
+//import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,7 +13,10 @@
 //import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 //
 //import javax.annotation.PostConstruct;
+//import java.net.http.HttpRequest;
 //import java.util.concurrent.TimeUnit;
+//
+//import static org.springframework.http.HttpMethod.POST;
 //
 //
 //@Configuration
@@ -22,7 +26,12 @@
 //
 //
 //    public static final String[] WHITE_LIST = {"/auth/login", "/error"};
-//    public static final String[] WHITE_LIST_RESOURCE = {"/webjars/**", "/css/*", "/js/*", "/img/**"};
+//    public static final String[] WHITE_LIST_RESOURCE = {"/webjars/**", "/css/**", "/js/**", "/img/**"};
+////    @Value(value = "${remember.me.token.key}")
+////    private String rememberMeTokenKey;
+////
+////    @Value(value = "${remember.me.token.expiry}")
+////    private int rememberMeTokenExpiry;
 //
 //    private int rememberMeTokenExpiryInSeconds;
 //
@@ -44,6 +53,7 @@
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
 //        http
+//                .csrf().disable()
 //                .sessionManagement(httpSecuritySessionManagementConfigurer ->
 //                        httpSecuritySessionManagementConfigurer
 //                                .maximumSessions(1)
@@ -51,8 +61,8 @@
 //                )
 //                .authorizeRequests((authorizeRequests) ->
 //                        authorizeRequests
-//                                .antMatchers(WHITE_LIST)
-//                                .permitAll()
+//                                .antMatchers(WHITE_LIST).permitAll()
+//                                .antMatchers(POST, WHITE_LIST).permitAll()
 //                                .anyRequest()
 //                                .authenticated()
 //                )
@@ -63,7 +73,6 @@
 //                                .loginProcessingUrl("/auth/login")
 //                                .usernameParameter("username")
 //                                .passwordParameter("password")
-////                                .defaultSuccessUrl("/index/index", false)
 //                                .defaultSuccessUrl("/", false)
 //                )
 //                .rememberMe((httpSecurityRememberMeConfigurer) ->

@@ -1,7 +1,7 @@
 package uz.doston.springcrm.service.organization;
 
 import lombok.SneakyThrows;
-import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import uz.doston.springcrm.dto.organization.OrganizationCreateDto;
 import uz.doston.springcrm.dto.organization.OrganizationDto;
@@ -47,7 +47,6 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
         organization.setLogo(logo);
         organization.setOwnerId(1L);
         repository.save(organization);
-
     }
 
     @Override
@@ -71,7 +70,6 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
 
         return organizationDtos;
     }
-
 
     @Override
     public OrganizationDto get(Long id) {

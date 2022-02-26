@@ -31,10 +31,10 @@ public class Task extends Auditable {
     private List<ProjectMember> projectMembers;
 
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "project_id")
     private Long projectId;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "owner_id")
     private Long ownerId;
 
     @Column(nullable = false)
