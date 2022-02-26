@@ -61,6 +61,18 @@
         <div class="container">
             <h3 th:text="${project.name}"></h3>
 
+            <form class="ml-3" th:action="@{/project/close/{id}(id=${project.id})}" method="post">
+                <button type="submit" style="border: none" class="box qwerty">
+                    <p th:text="Close"></p>
+                </button>
+            </form>
+
+            <form class="ml-3" th:action="@{/project/delete/{id}(id=${project.id})}" method="post">
+                <button type="submit" style="border: none" class="box qwerty">
+                    <p th:text="Delete"></p>
+                </button>
+            </form>
+
             <div class="contents">
                 <div class="content">
                     <div class="box">
