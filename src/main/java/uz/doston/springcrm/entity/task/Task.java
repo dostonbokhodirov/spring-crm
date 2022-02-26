@@ -3,7 +3,6 @@ package uz.doston.springcrm.entity.task;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import uz.doston.springcrm.entity.Auditable;
 import uz.doston.springcrm.entity.auth.AuthUser;
 import uz.doston.springcrm.enums.Level;

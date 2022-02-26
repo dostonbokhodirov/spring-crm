@@ -86,12 +86,12 @@ public class ProjectController extends AbstractController<ProjectService> {
     @RequestMapping(value = "{id}/column/list")
     public String getAllColumns(@PathVariable("id") Long id, Model model) {
         List<ProjectColumnDto> allColumns = columnService.getAllColumns(id);
-        List<TaskDto> allTasks = taskService.getAllTasks(id);
-        List<Long> membersId = service.getMembersId(id);
-        List<AuthUserDto> allUsers = userService.getAllUsers(membersId);
+//        List<TaskDto> allTasks = taskService.getAllTasks(id);
+//        List<Long> membersId = service.getMembersId(id);
+//        List<AuthUserDto> allUsers = userService.getAllUsers(membersId);
 
         model.addAttribute("project", service.get(id));
-        model.addAttribute("columns", service.getAllColumns(id, allUsers, allTasks, allColumns));
+        model.addAttribute("columns", service.getAllColumns(id));
 
         return "task/detail";
     }
