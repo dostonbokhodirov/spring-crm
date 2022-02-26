@@ -7,7 +7,6 @@ import uz.doston.springcrm.entity.Auditable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -17,17 +16,16 @@ import javax.persistence.Table;
 @Table(schema = "project")
 public class Project extends Auditable {
 
-
-
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "tz_path", nullable = false)
     private String tzPath;
 
+    @Column(name = "organization_id")
     private Long organizationId;
 
+    @Column(columnDefinition = "false")
     private boolean closed;
-
 
 }

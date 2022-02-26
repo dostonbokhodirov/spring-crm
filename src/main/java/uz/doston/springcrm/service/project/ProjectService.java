@@ -7,9 +7,7 @@ import uz.doston.springcrm.dto.project.ProjectCreateDto;
 import uz.doston.springcrm.dto.project.ProjectDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
 import uz.doston.springcrm.dto.task.TaskDto;
-import uz.doston.springcrm.dto.task.TaskMemberDto;
 import uz.doston.springcrm.entity.project.Project;
-import uz.doston.springcrm.entity.task.TaskMember;
 import uz.doston.springcrm.mapper.project.ProjectMapper;
 import uz.doston.springcrm.mapper.project.ProjectMemberMapper;
 import uz.doston.springcrm.mapper.task.TaskMemberMapper;
@@ -76,26 +74,26 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
 
     public List<ProjectColumnDto> getAllColumns(Long id, List<AuthUserDto> userDtos, List<TaskDto> taskDtos, List<ProjectColumnDto> columnDtos) {
 
-        for (ProjectColumnDto columnDto : columnDtos) {
-            List<TaskMember> taskMembersId = taskMemberRepository.findAllByProjectColumnId(columnDto.getId());
-            List<TaskMemberDto> taskMemberDtos = taskMemberMapper.toDto(taskMembersId);
-
-            for (TaskMemberDto taskMember : taskMemberDtos) {
-                for (AuthUserDto userDto : userDtos) {
-                    for (TaskDto taskDto : taskDtos) {
-                        if (taskMember.getUserId().equals(userDto.getId()) && taskDto.getId().equals(taskMember.getTaskId())) {
-                            if (Objects.isNull(taskDto.getUsers())){
-                                taskDto.setUsers(List.of(userDto));
-                            }
-                            else {
-                                taskDto.getUsers().add(userDto);
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
+//        for (ProjectColumnDto columnDto : columnDtos) {
+//            List<TaskMember> taskMembersId = taskMemberRepository.findAllByProjectColumnId(columnDto.getId());
+//            List<TaskMemberDto> taskMemberDtos = taskMemberMapper.toDto(taskMembersId);
+//
+//            for (TaskMemberDto taskMember : taskMemberDtos) {
+//                for (AuthUserDto userDto : userDtos) {
+//                    for (TaskDto taskDto : taskDtos) {
+//                        if (taskMember.getUserId().equals(userDto.getId()) && taskDto.getId().equals(taskMember.getTaskId())) {
+//                            if (Objects.isNull(taskDto.getUsers())){
+//                                taskDto.setUsers(List.of(userDto));
+//                            }
+//                            else {
+//                                taskDto.getUsers().add(userDto);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//        }
 
 
 //        for (ProjectColumnDto columnDto : columnDtos) {

@@ -4,12 +4,10 @@ package uz.doston.springcrm.entity.project;
 import lombok.Getter;
 import lombok.Setter;
 import uz.doston.springcrm.entity.Auditable;
+import uz.doston.springcrm.entity.icon.Icon;
 import uz.doston.springcrm.entity.task.Task;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
@@ -17,9 +15,6 @@ import java.util.List;
 @Entity
 @Table(schema = "project")
 public class ProjectColumn extends Auditable {
-
-    @OneToMany(mappedBy = "projectColumn")
-    private List<Task> tasks;
 
     @Column(nullable = false)
     private String name;
@@ -30,8 +25,14 @@ public class ProjectColumn extends Auditable {
     @Column(nullable = false, unique = true, name = "order_number")
     private Long orderNumber;
 
-    private Long iconId;
+    @OneToMany(mappedBy = "columnId")
+    private List<Task> tasks;
 
-    private boolean active = true;
+    @OneToOne
+    @JoinColumn(name = "icon_id")
+    private Icon icon;
+
+    @Column(columnDefinition = "true")
+    private boolean active;
 
 }

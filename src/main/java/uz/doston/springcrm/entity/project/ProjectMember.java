@@ -16,16 +16,14 @@ public class ProjectMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private AuthUser authUser;
 
     @OneToOne
-    @JoinColumn(name="user_id", nullable=false)
-    private AuthUser user;
-
-    @OneToOne
-    @JoinColumn(name = "project_id",nullable = false)
+    @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
     private boolean lead;
-
 
 }

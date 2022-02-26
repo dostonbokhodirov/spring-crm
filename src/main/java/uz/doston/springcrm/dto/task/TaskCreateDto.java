@@ -7,5 +7,6 @@ import uz.doston.springcrm.dto.BaseDto;
 @Getter
 @Setter
 public class TaskCreateDto implements BaseDto {
-
+    private String name;
+    private String description;
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface TaskMemberRepository extends JpaRepository<TaskMember,Long>, BaseRepository {
 
+    TaskMember findByTaskId(long taskId);
 
     List<TaskMember> findAllByProjectColumnId(Long id);
 

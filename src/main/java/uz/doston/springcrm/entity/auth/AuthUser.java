@@ -15,7 +15,6 @@ import java.util.UUID;
 @Table(schema = "auth")
 public class AuthUser extends Auditable {
 
-
     @Column(unique = true, nullable = false)
     private String username;
 

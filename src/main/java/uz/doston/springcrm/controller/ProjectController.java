@@ -97,7 +97,7 @@ public class ProjectController extends AbstractController<ProjectService> {
         model.addAttribute("project", service.get(id));
         model.addAttribute("columns", service.getAllColumns(id, allUsers,allTasks,allColumns));
 
-        return "task/index2";
+        return "task/detail";
     }
 
 //
