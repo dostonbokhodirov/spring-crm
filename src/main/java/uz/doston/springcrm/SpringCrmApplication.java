@@ -20,12 +20,12 @@ public class SpringCrmApplication /*implements CommandLineRunner*/ {
 
     private final AuthUserRepository authUserRepository;
     private final AuthRoleRepository authRoleRepository;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public SpringCrmApplication(AuthUserRepository authUserRepository, AuthRoleRepository authRoleRepository/*, PasswordEncoder passwordEncoder*/) {
+    public SpringCrmApplication(AuthUserRepository authUserRepository, AuthRoleRepository authRoleRepository, PasswordEncoder passwordEncoder) {
         this.authUserRepository = authUserRepository;
         this.authRoleRepository = authRoleRepository;
-//        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public static void main(String[] args) {
@@ -38,14 +38,13 @@ public class SpringCrmApplication /*implements CommandLineRunner*/ {
 //        admin.setUsername("admin");
 //        admin.setPassword(passwordEncoder.encode("admin123"));
 //        admin.setFirstName("admin");
-//        admin.setCreatedBy(1L);
-//        admin.setUpdatedBy(1L);
 //        admin.setAge(22);
 //        admin.setEmail("admin@mail.ru");
 //        AuthRole adminRole = authRoleRepository.findAuthRoleByCode("ADMIN").orElse(new AuthRole());
+//        adminRole.setCode("ADMIN");
+//        adminRole.setName("Admin");
 //        admin.setRole(adminRole);
 //        admin.setCode(UUID.randomUUID());
-//
 //
 //
 //        AuthUser manager = new AuthUser();
@@ -53,11 +52,11 @@ public class SpringCrmApplication /*implements CommandLineRunner*/ {
 //        manager.setPassword(passwordEncoder.encode("manager123"));
 //        manager.setFirstName("manager");
 //        manager.setAge(25);
-//        manager.setCreatedBy(1L);
-//        manager.setUpdatedBy(1L);
 //        manager.setEmail("manager@mail.ru");
 //        manager.setCode(UUID.randomUUID());
 //        AuthRole managerRole = authRoleRepository.findAuthRoleByCode("MANAGER").orElse(new AuthRole());
+//        managerRole.setCode("MANAGER");
+//        managerRole.setName("Manager");
 //        manager.setRole(managerRole);
 //
 //        authUserRepository.saveAll(List.of(admin, manager));
