@@ -1,12 +1,12 @@
 package uz.doston.springcrm.controller;
 
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import uz.doston.springcrm.dto.auth.AuthUserCreateDto;
-import uz.doston.springcrm.dto.auth.AuthUserDto;
-import uz.doston.springcrm.entity.auth.AuthUser;
 import uz.doston.springcrm.service.auth.AuthUserService;
 
 @Controller

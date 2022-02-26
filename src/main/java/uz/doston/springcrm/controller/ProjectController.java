@@ -9,11 +9,11 @@ import uz.doston.springcrm.dto.column.ProjectColumnDto;
 import uz.doston.springcrm.dto.project.ProjectCreateDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
 import uz.doston.springcrm.dto.task.TaskDto;
-import uz.doston.springcrm.dto.task.TaskMemberDto;
+import uz.doston.springcrm.entity.task.Task;
+import uz.doston.springcrm.repository.task.TaskRepository;
 import uz.doston.springcrm.service.auth.AuthUserService;
 import uz.doston.springcrm.service.project.ProjectColumnService;
 import uz.doston.springcrm.service.project.ProjectService;
-import uz.doston.springcrm.service.task.TaskMemberService;
 import uz.doston.springcrm.service.task.TaskService;
 
 import java.util.List;
@@ -26,30 +26,26 @@ public class ProjectController extends AbstractController<ProjectService> {
     private TaskService taskService;
     private ProjectColumnService columnService;
 
-    private TaskMemberService taskMemberService;
-
     public ProjectController(ProjectService service,
                              AuthUserService userService,
                              TaskService taskService,
-                             ProjectColumnService columnService,
-                             TaskMemberService taskMemberService) {
+                             ProjectColumnService columnService) {
         super(service);
         this.userService = userService;
         this.taskService = taskService;
         this.columnService = columnService;
-        this.taskMemberService = taskMemberService;
     }
 
     @GetMapping(value = "create")
     public String createPage(Model model) {
         model.addAttribute("project", new ProjectCreateDto());
-        return "project/list";
+        return "project/create";
     }
 
     @PostMapping(value = "")
     public String create(@ModelAttribute ProjectCreateDto dto) {
         service.create(dto);
-        return "redirect:organization/list";
+        return "redirect:/project/list";
     }
 
     @GetMapping(value = "delete/{id}")
@@ -95,7 +91,7 @@ public class ProjectController extends AbstractController<ProjectService> {
         List<AuthUserDto> allUsers = userService.getAllUsers(membersId);
 
         model.addAttribute("project", service.get(id));
-        model.addAttribute("columns", service.getAllColumns(id, allUsers,allTasks,allColumns));
+        model.addAttribute("columns", service.getAllColumns(id, allUsers, allTasks, allColumns));
 
         return "task/detail";
     }

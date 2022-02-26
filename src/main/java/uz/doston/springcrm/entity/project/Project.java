@@ -25,7 +25,7 @@ public class Project extends Auditable {
     @Column(name = "organization_id")
     private Long organizationId;
 
-    @Column(columnDefinition = "false")
+    @Column
     private boolean closed;
 
 }

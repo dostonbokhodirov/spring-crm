@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import uz.doston.springcrm.dto.task.TaskCreateDto;
+import uz.doston.springcrm.entity.task.Task;
 import uz.doston.springcrm.service.task.TaskService;
 
 @Controller
@@ -55,7 +56,10 @@ public class TaskController extends AbstractController<TaskService> {
     }
 
     @GetMapping(value="list")
-    public String getAll(@PathVariable(value="id") Long id) {
+    public String getAll() {
+        Task task = service.test();
+        System.out.println(task);
+        System.out.println(task.getTaskMembers());
         return null;
     }
 }

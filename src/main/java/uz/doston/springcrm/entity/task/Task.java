@@ -3,7 +3,9 @@ package uz.doston.springcrm.entity.task;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import uz.doston.springcrm.entity.Auditable;
+import uz.doston.springcrm.entity.auth.AuthUser;
 import uz.doston.springcrm.enums.Level;
 
 import javax.persistence.*;
@@ -28,7 +30,7 @@ public class Task extends Auditable {
             name = "task_member",
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<TaskMember> taskMembers;
+    private List<AuthUser> taskMembers;
 
     @Column(nullable = false)
     private String name;
@@ -49,6 +51,6 @@ public class Task extends Auditable {
     private Integer priority;
 
     @Column
-    private boolean completed;
+    private boolean completed = false;
 
 }

@@ -16,10 +16,10 @@ import java.util.List;
 
 @Service
 public class TaskService extends AbstractService<TaskMapper, TaskRepository> implements GenericCrudService<TaskCreateDto, TaskUpdateDto>, GenericService<TaskDto> {
+
     public TaskService(TaskMapper mapper, TaskRepository repository) {
         super(mapper, repository);
     }
-
 
     public List<TaskDto> getAllTasks(Long id) {
         List<Task> tasks = repository.findAllByProjectId(id);
@@ -50,5 +50,9 @@ public class TaskService extends AbstractService<TaskMapper, TaskRepository> imp
     @Override
     public TaskDto get(Long id) {
         return null;
+    }
+
+    public Task test() {
+        return repository.findTaskById(1L);
     }
 }

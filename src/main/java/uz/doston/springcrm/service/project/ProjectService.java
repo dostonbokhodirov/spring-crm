@@ -10,10 +10,8 @@ import uz.doston.springcrm.dto.task.TaskDto;
 import uz.doston.springcrm.entity.project.Project;
 import uz.doston.springcrm.mapper.project.ProjectMapper;
 import uz.doston.springcrm.mapper.project.ProjectMemberMapper;
-import uz.doston.springcrm.mapper.task.TaskMemberMapper;
 import uz.doston.springcrm.repository.project.ProjectMemberRepository;
 import uz.doston.springcrm.repository.project.ProjectRepository;
-import uz.doston.springcrm.repository.task.TaskMemberRepository;
 import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
 import uz.doston.springcrm.service.base.GenericService;
@@ -25,23 +23,15 @@ import java.util.Objects;
 public class ProjectService extends AbstractService<ProjectMapper, ProjectRepository>
         implements GenericCrudService<ProjectCreateDto, ProjectUpdateDto>, GenericService<ProjectDto> {
 
-
-    private TaskMemberRepository taskMemberRepository;
-    private TaskMemberMapper taskMemberMapper;
-
     private ProjectMemberRepository projectMemberRepository;
     private ProjectMemberMapper projectMemberMapper;
 
 
     public ProjectService(ProjectMapper mapper,
                           ProjectRepository repository,
-                          ProjectMemberRepository projectMemberRepository,
-                          TaskMemberRepository taskMemberRepository,
-                          TaskMemberMapper taskMemberMapper) {
+                          ProjectMemberRepository projectMemberRepository) {
         super(mapper, repository);
         this.projectMemberRepository = projectMemberRepository;
-        this.taskMemberRepository = taskMemberRepository;
-        this.taskMemberMapper = taskMemberMapper;
     }
 
     @Override

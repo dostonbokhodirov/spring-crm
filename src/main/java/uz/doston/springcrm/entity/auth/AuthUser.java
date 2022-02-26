@@ -37,15 +37,18 @@ public class AuthUser extends Auditable {
     private UUID code;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @Column(name = "organization_id")
     private Long organizationId;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id")
     private AuthRole role;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Language language;
 
     @Column

@@ -32,7 +32,7 @@ public class ProjectColumn extends Auditable {
     @JoinColumn(name = "icon_id")
     private Icon icon;
 
-    @Column(columnDefinition = "true")
-    private boolean active;
+    @Column
+    private boolean active = true;
 
 }
