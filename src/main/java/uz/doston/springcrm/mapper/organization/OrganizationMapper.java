@@ -15,6 +15,7 @@ import java.util.List;
 @Component
 @Mapper(componentModel = "spring")
 public interface OrganizationMapper extends BaseMapper {
+
     OrganizationDto toDto(Organization organization);
 
     List<OrganizationDto> toDto(List<Organization> list);

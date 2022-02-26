@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head >
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,24 +17,40 @@
 </head>
 <body>
 <div class="container" th:method="post">
-
-    <div class="login-text">
-        <h3>Create Organization</h3>
-    </div>
-
-    <div class="login-input">
-        <input th:name="name" type="text" placeholder="Name">
-        <input th:name="email" type="email" placeholder="Email">
-<!--        <input th:name="logo" type="file" placeholder="Logo">-->
-        <input th:name="location" type="text" placeholder="Location">
-    </div>
-    <div class="goBack" id="link">
-        <a href="#">Back</a>
-        <div class="login-button" >
-            <button type="submit">Create</button>
+    <form th:action="@{/organization/create}" th:method="post" th:object="${dto}"
+    enctype="multipart/form-data"
+    >
+        <div class="login-text">
+            <h3>Create Organization</h3>
         </div>
-    </div>
 
+        <div class="login-input">
+            <div>
+                <input th:name="name" type="text" placeholder="Name">
+                <span style="color: red" th:errors="*{name}"></span>
+            </div>
+
+            <div>
+                <input th:name="email" err type="email" placeholder="Email">
+            </div>
+
+            <div>
+                <input name="logo" type="file" placeholder="Logo">
+                <span style="color: red" th:errors="*{logo}"></span>
+            </div>
+            <div>
+                <input th:name="location" type="text" placeholder="Location">
+            </div>
+
+
+        </div>
+        <div class="goBack" id="link">
+            <a href="#">Back</a>
+            <div class="login-button">
+                <button type="submit">Create</button>
+            </div>
+        </div>
+    </form>
 </div>
 </body>
 </html>

@@ -7,6 +7,7 @@ import uz.doston.springcrm.mapper.organization.OrganizationLogoMapper;
 import uz.doston.springcrm.repository.organization.OrganizationLogoRepository;
 import uz.doston.springcrm.service.base.AbstractService;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +18,7 @@ import java.util.UUID;
 @Service
 public class OrganizationLogoService extends AbstractService<OrganizationLogoMapper, OrganizationLogoRepository> {
 
-    private static final String UPLOAD_DIRECTORY = "logo";
+    private static final String UPLOAD_DIRECTORY = "src/main/resources/logo";
 
     public OrganizationLogoService(OrganizationLogoMapper mapper, OrganizationLogoRepository repository) {
         super(mapper, repository);
@@ -34,6 +35,10 @@ public class OrganizationLogoService extends AbstractService<OrganizationLogoMap
         Path path = Paths.get(UPLOAD_DIRECTORY + "/" + logo.getGeneratedName() + "." + logo.getFormat());
         Files.copy(file.getInputStream(), path);
         return logo;
+    }
+
+    public Logo get(Long id) {
+        return repository.findById(id).get();
     }
 
 }

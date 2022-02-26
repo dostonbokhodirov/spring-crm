@@ -1,6 +1,7 @@
 package uz.doston.springcrm.service.organization;
 
 import lombok.SneakyThrows;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 import uz.doston.springcrm.dto.organization.OrganizationCreateDto;
 import uz.doston.springcrm.dto.organization.OrganizationDto;
@@ -13,6 +14,8 @@ import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
 import uz.doston.springcrm.service.base.GenericService;
 
+import javax.swing.*;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -35,13 +38,16 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
 
     }
 
+    @Transactional
     @Override
     @SneakyThrows
     public void create(OrganizationCreateDto dto) {
         Logo logo = logoService.create(dto.getLogo());
         Organization organization = mapper.fromCreateDto(dto);
         organization.setLogo(logo);
+        organization.setOwnerId(1L);
         repository.save(organization);
+
     }
 
     @Override
@@ -60,12 +66,26 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
     @Override
     public List<OrganizationDto> getAll() {
         List<Organization> organizations = repository.findAll();
-        return mapper.toDto(organizations);
+        List<OrganizationDto> organizationDtos = mapper.toDto(organizations);
+        inputPathLogo(organizationDtos);
+
+        return organizationDtos;
     }
+
 
     @Override
     public OrganizationDto get(Long id) {
         return null;
+    }
+
+    private void inputPathLogo(List<OrganizationDto> organizationDtos) {
+        for (OrganizationDto organizationDto : organizationDtos) {
+            organizationDto.setLogoPath(findLogoPathById(organizationDto.getLogo()));
+        }
+    }
+
+    private String findLogoPathById(Logo logo) {
+        return "../../logo/" + logo.getGeneratedName() + "." + logo.getFormat();
     }
 
 }

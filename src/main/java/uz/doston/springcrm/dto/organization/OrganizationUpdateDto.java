@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-@Builder(builderMethodName = "childBuilder")
+//@Builder(builderMethodName = "childBuilder")
 @NoArgsConstructor
 public class OrganizationUpdateDto extends BaseGenericDto {
 
