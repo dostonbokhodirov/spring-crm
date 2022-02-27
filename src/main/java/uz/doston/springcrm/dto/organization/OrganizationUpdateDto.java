@@ -27,4 +27,6 @@ public class OrganizationUpdateDto extends BaseGenericDto {
 
     private Point location;
 
+    private String email;
+
 }
