@@ -23,8 +23,14 @@ import static org.springframework.http.HttpMethod.POST;
 public class CustomSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 
-    public static final String[] WHITE_LIST = {"/auth/login", "/error", "/auth/register", "/project/**", "/task/**"};
+    public static final String[] WHITE_LIST = {"/auth/login", "/error", "/auth/register","/project/1/column/list"};
     public static final String[] WHITE_LIST_RESOURCE = {"/webjars/**", "/css/**", "/js/**", "/img/**"};
+//    @Value(value = "${remember.me.token.key}")
+//    private String rememberMeTokenKey;
+//
+//    @Value(value = "${remember.me.token.expiry}")
+//    private int rememberMeTokenExpiry;
+
     private int rememberMeTokenExpiryInSeconds;
 
     private final PasswordEncoder passwordEncoder;

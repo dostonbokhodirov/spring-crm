@@ -25,6 +25,10 @@ public class TaskService extends AbstractService<TaskMapper, TaskRepository> imp
         return mapper.toDto(tasks);
     }
 
+    public List<Task> getAllEntity(Long id) {
+        return repository.findAllByProjectId(id);
+    }
+
 
     @Override
     public void delete(Long id) {

@@ -12,7 +12,7 @@ import java.util.List;
 public interface ProjectMemberRepository extends JpaRepository<ProjectMember,Long>, BaseRepository {
 
 
-    List<Long>  findProjectMembersByProjectId(Long id);
+    List<ProjectMember>  findProjectMembersByProjectId(Long id);
 
     List<ProjectMember> findAllByProjectId(Long id);
 

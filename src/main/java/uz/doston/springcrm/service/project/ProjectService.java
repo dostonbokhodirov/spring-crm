@@ -65,6 +65,7 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
         return projectMemberRepository.findProjectMembersByProjectId(id);
     }
 
+
     @Transactional
     public List<ProjectColumnDto> getAllColumns(Long id) {
 
@@ -77,7 +78,11 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
 //            }
 //        }
         return dtoList;
+    }
 
+
+    public List<ProjectColumn> getAllColumnEntity(Long id) {
+        return columnRepository.findProjectColumnsByProjectId(id);
     }
 
     @Transactional

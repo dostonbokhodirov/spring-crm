@@ -4,7 +4,6 @@ package uz.doston.springcrm.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import uz.doston.springcrm.dto.column.ProjectColumnDto;
 import uz.doston.springcrm.dto.project.ProjectCreateDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
 import uz.doston.springcrm.dto.task.TaskDto;
@@ -67,9 +66,25 @@ public class ProjectController extends AbstractController<ProjectService> {
 
     @PostMapping(value = "detail/{id}")
     public String get(Model model, @PathVariable("id") Long id) {
-        List<ProjectColumnDto> allColumns = columnService.getAllColumns(id);
+        model.addAttribute("project", service.get(id));
+        return "project/detail";
+    }
+
+    @GetMapping(value = "list")
+    public String getAll(Model model) {
+        model.addAttribute("projects", service.getAll());
+        return "project/list";
+    }
+
+    @RequestMapping(value = "{id}/column/list", method = RequestMethod.GET)
+    public String getAllColumns(@PathVariable("id") Long id, Model model) {
+
+//        List<Task> allEntity = taskService.getAllEntity(id);
+//        List<ProjectColumnDto> allColumns = service.getAllColumns(id,allEntity);
+//        List<AuthUserDto> allUsers = userService.getAllUsers(membersId);
+
         List<TaskDto> allTasks = taskService.getAllTasks(id);
-        List<Long> membersId = service.getMembersId(id);
+        Long membersId = service.getMembersId(id);
 
         int frozenTasks = 0;
         for (TaskDto task : allTasks) {
@@ -83,7 +98,7 @@ public class ProjectController extends AbstractController<ProjectService> {
 
         model.addAttribute("project", service.get(id));
         model.addAttribute("frozenTasks", frozenTasks);
-        model.addAttribute("participants",membersId.size());
+        model.addAttribute("participants",membersId);
         model.addAttribute("tasksCount", taskService.getAllTasks(id).size());
         model.addAttribute("doneTasks", doneTasks);
 //        model.addAttribute("columns", service.getAllColumns(id));
