@@ -30,6 +30,7 @@ public class ProjectColumnService extends AbstractService<ProjectColumnMapper, P
 
     @Override
     public ProjectColumnDto get(Long id) {
-        return null;
+        ProjectColumn projectColumn = repository.findById(id).orElseThrow(() -> new RuntimeException("Column Not Found"));
+        return mapper.toDto(projectColumn);
     }
 }

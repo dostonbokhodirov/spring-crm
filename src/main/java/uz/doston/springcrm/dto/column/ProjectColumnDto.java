@@ -5,7 +5,6 @@ import lombok.Setter;
 import uz.doston.springcrm.dto.BaseGenericDto;
 import uz.doston.springcrm.dto.task.TaskDto;
 import uz.doston.springcrm.entity.icon.Icon;
-import uz.doston.springcrm.entity.task.Task;
 
 import java.util.List;
 
@@ -15,7 +14,9 @@ public class ProjectColumnDto extends BaseGenericDto {
 
     private String name;
 
-    private List<Task> tasks;
+    private Long projectId;
+
+    private List<TaskDto> tasks;
 
     private Long orderNumber;
 
