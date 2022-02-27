@@ -61,17 +61,15 @@
         <div class="container" th:object="${project}">
             <h3 th:text="${project.name}"></h3>
 
-            <!--            <form class="ml-3" th:action="@{/project/close/{id}(id=${project.id})}" method="post">-->
-            <!--                <button type="submit" style="border: none" class="box qwerty">-->
-            <!--                    <p th:text="Close"></p>-->
-            <!--                </button>-->
-            <!--            </form>-->
+            <div>
+                <form th:action="@{/project/close/{id}(id=${project.id})}" method="post">
+                    <button type="submit" class="btn btn-primary">Close Project</button>
+                </form>
 
-            <!--            <form class="ml-3" th:action="@{/project/delete/{id}(id=${project.id})}" method="post">-->
-            <!--                <button type="submit" style="border: none" class="box qwerty">-->
-            <!--                    <p th:text="Delete"></p>-->
-            <!--                </button>-->
-            <!--            </form>-->
+                <form th:action="@{/project/delete/{id}(id=${project.id})}">
+                    <button type="submit" class="btn btn-primary">Delete Project</button>
+                </form>
+            </div>
 
 
             <div class="contents" th:object="${participants}">
@@ -109,7 +107,11 @@
                             <td th:each="task,iter : ${column.tasks}">
                                 <div class="todo-box">
                                     <div>
-                                        <a th:utext="${task.name}"></a>
+                                        <form th:action="@{/task/detail/{id}(id=${task.id})}" method="post">
+                                            <button>
+                                                <a th:text="${task.name}"></a>
+                                            </button>
+                                        </form>
                                         <button th:class="${task.level}" th:utext="${task.level}"></button>
                                     </div>
                                     <div class="task-participants" th:each="member,iterMember : ${task.taskMembers}">

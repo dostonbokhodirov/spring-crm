@@ -22,7 +22,7 @@ import static org.springframework.http.HttpMethod.POST;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class CustomSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
-    public static final String[] WHITE_LIST = {"/auth/login", "/error", "/auth/register","/project/**", "/task/**"};
+    public static final String[] WHITE_LIST = {"/auth/login", "/error", "/auth/register","/project/**", "/task/**", "/organization/**"};
     public static final String[] WHITE_LIST_RESOURCE = {"/webjars/**", "/css/**", "/js/**", "/img/**"};
 
     private int rememberMeTokenExpiryInSeconds;
