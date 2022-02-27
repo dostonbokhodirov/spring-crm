@@ -4,55 +4,65 @@ package uz.doston.springcrm.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import uz.doston.springcrm.dto.column.ProjectColumnDto;
 import uz.doston.springcrm.dto.task.TaskCreateDto;
 import uz.doston.springcrm.dto.task.TaskUpdateDto;
+import uz.doston.springcrm.service.project.ProjectColumnService;
 import uz.doston.springcrm.service.task.TaskService;
 
 @Controller
 @RequestMapping(value = "/task/*")
 public class TaskController extends AbstractController<TaskService> {
 
-    public TaskController(TaskService service) {
+    private final ProjectColumnService columnService;
+
+
+    public TaskController(TaskService service, ProjectColumnService columnService) {
         super(service);
+        this.columnService = columnService;
     }
 
-    @PostMapping(value = "create")
-    public String createPage(Model model) {
-        model.addAttribute("task", new TaskCreateDto());
+
+    @GetMapping(value = "create/{id}")
+    public String createPage(Model model, @PathVariable(value = "id") Long columnId) {
+        model.addAttribute("task", new TaskCreateDto(columnId));
         return "task/create";
     }
 
-    @PostMapping(value = "")
+    @PostMapping(value = "create")
     public String create(@ModelAttribute TaskCreateDto dto) {
+        ProjectColumnDto columnDto = columnService.get(dto.getColumnId());
+        dto.setProjectId(columnDto.getProjectId());
+        dto.setOwnerId(1L);
         service.create(dto);
         return "redirect:/project/list";
     }
 
-    @GetMapping(value = "{id}/update")
+    @GetMapping(value = "update/{id}")
     public String updatePage(Model model, @PathVariable(value = "id") Long id) {
         model.addAttribute("task", service.get(id));
         return "task/update";
     }
 
-    @PostMapping(value = "{id}/update")
+    @PostMapping(value = "update/{id}")
     public String update(@ModelAttribute TaskUpdateDto dto, @PathVariable(value = "id") Long id) {
         service.update(dto);
         return "redirect:/project/list";
     }
 
-    @GetMapping(value = "{id}/delete")
+    @GetMapping(value = "delete/{id}")
     public String deletePage(Model model, @PathVariable(value = "id") Long id) {
         model.addAttribute("task", service.get(id));
         return "task/delete";
     }
 
-    @DeleteMapping(value = "{id}/delete")
+    @DeleteMapping(value = "delete/{id}")
     public String delete(@PathVariable(value = "id") Long id) {
         service.delete(id);
         return "redirect:/project/list";
     }
 
-    @GetMapping(value = "detail{id}")
+    @GetMapping(value = "detail/{id}")
     public String get(Model model, @PathVariable(value = "id") Long id) {
         model.addAttribute("task", service.get(id));
         return "task/detail";

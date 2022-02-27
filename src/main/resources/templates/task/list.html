@@ -12,16 +12,18 @@
             <tr>
                 <th>#</th>
                 <th>Name</th>
+                <th>Description</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="organization,iter : ${organizations}">
+            <tr th:each="task,iter : ${tasks}">
                 <td th:text="${iter.count}"></td>
-                <td th:text="${organization.name}"></td>
+                <td th:text="${task.name}"></td>
+                <td th:text="${task.description}"></td>
+                <a th:href="@{/task/create/{id}(id=${task.columnId})}" class="btn btn-success">➕ New Task</a>
             </tr>
             </tbody>
         </table>
-        <a th:href="@{/organization/create}" class="btn btn-success">➕ New Organization</a>
     </div>
 </div>
 

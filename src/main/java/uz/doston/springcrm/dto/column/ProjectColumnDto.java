@@ -14,6 +14,8 @@ public class ProjectColumnDto extends BaseGenericDto {
 
     private String name;
 
+    private Long projectId;
+
     private List<TaskDto> tasks;
 
     private Long orderNumber;
