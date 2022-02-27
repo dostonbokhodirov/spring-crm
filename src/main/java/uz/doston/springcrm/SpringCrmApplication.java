@@ -11,15 +11,15 @@ import uz.doston.springcrm.repository.auth.AuthUserRepository;
 @SpringBootApplication
 public class SpringCrmApplication /*implements CommandLineRunner*/ {
 
-    private final AuthUserRepository authUserRepository;
-    private final AuthRoleRepository authRoleRepository;
-    private final PasswordEncoder passwordEncoder;
-
-    public SpringCrmApplication(AuthUserRepository authUserRepository, AuthRoleRepository authRoleRepository, PasswordEncoder passwordEncoder) {
-        this.authUserRepository = authUserRepository;
-        this.authRoleRepository = authRoleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+//    private final AuthUserRepository authUserRepository;
+//    private final AuthRoleRepository authRoleRepository;
+//    private final PasswordEncoder passwordEncoder;
+//
+//    public SpringCrmApplication(AuthUserRepository authUserRepository, AuthRoleRepository authRoleRepository, PasswordEncoder passwordEncoder) {
+//        this.authUserRepository = authUserRepository;
+//        this.authRoleRepository = authRoleRepository;
+//        this.passwordEncoder = passwordEncoder;
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(SpringCrmApplication.class, args);
