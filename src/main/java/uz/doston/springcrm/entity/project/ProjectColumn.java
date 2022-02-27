@@ -8,6 +8,7 @@ import uz.doston.springcrm.entity.icon.Icon;
 import uz.doston.springcrm.entity.task.Task;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Getter
@@ -25,7 +26,7 @@ public class ProjectColumn extends Auditable {
     @Column(nullable = false, unique = true, name = "order_number")
     private Long orderNumber;
 
-    @OneToMany(mappedBy = "columnId")
+    @OneToMany(mappedBy = "columnId",fetch = FetchType.EAGER)
     private List<Task> tasks;
 
     @OneToOne

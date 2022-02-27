@@ -4,7 +4,6 @@ package uz.doston.springcrm.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import uz.doston.springcrm.dto.column.ProjectColumnDto;
 import uz.doston.springcrm.dto.project.ProjectCreateDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
 import uz.doston.springcrm.dto.task.TaskDto;
@@ -79,10 +78,13 @@ public class ProjectController extends AbstractController<ProjectService> {
 
     @RequestMapping(value = "{id}/column/list", method = RequestMethod.GET)
     public String getAllColumns(@PathVariable("id") Long id, Model model) {
-        List<ProjectColumnDto> allColumns = columnService.getAllColumns(id);
-        List<TaskDto> allTasks = taskService.getAllTasks(id);
-        List<Long> membersId = service.getMembersId(id);
+
+//        List<Task> allEntity = taskService.getAllEntity(id);
+//        List<ProjectColumnDto> allColumns = service.getAllColumns(id,allEntity);
 //        List<AuthUserDto> allUsers = userService.getAllUsers(membersId);
+
+        List<TaskDto> allTasks = taskService.getAllTasks(id);
+        Long membersId = service.getMembersId(id);
 
         int frozenTasks = 0;
         for (TaskDto task : allTasks) {
@@ -96,10 +98,10 @@ public class ProjectController extends AbstractController<ProjectService> {
 
         model.addAttribute("project", service.get(id));
         model.addAttribute("frozenTasks", frozenTasks);
-        model.addAttribute("participants",membersId.size());
+        model.addAttribute("participants",membersId);
         model.addAttribute("tasksCount", taskService.getAllTasks(id).size());
         model.addAttribute("doneTasks", doneTasks);
-        model.addAttribute("columns", service.getAllColumns(id));
+        model.addAttribute("columns", service.getAllColumnEntity(id));
 
         return "project/column/list";
     }

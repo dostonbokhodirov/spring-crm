@@ -5,8 +5,11 @@ import uz.doston.springcrm.dto.column.ProjectColumnDto;
 import uz.doston.springcrm.dto.project.ProjectCreateDto;
 import uz.doston.springcrm.dto.project.ProjectDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
+import uz.doston.springcrm.dto.task.TaskDto;
 import uz.doston.springcrm.entity.project.Project;
 import uz.doston.springcrm.entity.project.ProjectColumn;
+import uz.doston.springcrm.entity.project.ProjectMember;
+import uz.doston.springcrm.entity.task.Task;
 import uz.doston.springcrm.mapper.project.ProjectColumnMapper;
 import uz.doston.springcrm.mapper.project.ProjectMapper;
 import uz.doston.springcrm.repository.column.ProjectColumnRepository;
@@ -17,6 +20,7 @@ import uz.doston.springcrm.service.base.GenericCrudService;
 import uz.doston.springcrm.service.base.GenericService;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ProjectService extends AbstractService<ProjectMapper, ProjectRepository>
@@ -63,16 +67,34 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
 //    }
 
 
-    public List<Long> getMembersId(Long id) {
-        return projectMemberRepository.findProjectMembersByProjectId(id);
+    public Long getMembersId(Long id) {
+        List<ProjectMember> projectMembers = projectMemberRepository.findProjectMembersByProjectId(id);
+        return (long) projectMembers.size();
     }
 
 
-    public List<ProjectColumnDto> getAllColumns(Long id) {
+    public List<ProjectColumnDto> getAllColumns(Long id, List<Task> taskDtos) {
 
         List<ProjectColumn> columns = columnRepository.findProjectColumnsByProjectId(id);
-        return columnMapper.toDto(columns);
+        List<ProjectColumnDto> columnDtos = columnMapper.toDto(columns);
 
+//        for (ProjectColumnDto columnDto : columnDtos) {
+//            for (Task taskDto : taskDtos) {
+//                if (taskDto.getColumnId().equals(columnDto.getId())) {
+//                    if (Objects.isNull(columnDto.getTasks())) {
+//                        columnDto.setTasks(List.of(taskDto));
+//                    } else {
+//                        columnDto.getTasks().add(taskDto);
+//                    }
+//                }
+//            }
+//        }
+        return columnDtos;
+    }
+
+
+    public List<ProjectColumn> getAllColumnEntity(Long id){
+        return columnRepository.findProjectColumnsByProjectId(id);
     }
 
 
