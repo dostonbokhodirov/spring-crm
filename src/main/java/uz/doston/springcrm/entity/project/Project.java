@@ -26,7 +26,7 @@ public class Project extends Auditable {
     @Column(name = "organization_id")
     private Long organizationId;
 
-    @Column(nullable = false)
+    @Column
     private LocalDateTime deadline;
 
     @Column

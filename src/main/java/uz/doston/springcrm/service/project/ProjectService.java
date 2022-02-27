@@ -5,13 +5,12 @@ import uz.doston.springcrm.dto.column.ProjectColumnDto;
 import uz.doston.springcrm.dto.project.ProjectCreateDto;
 import uz.doston.springcrm.dto.project.ProjectDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
-import uz.doston.springcrm.dto.task.TaskDto;
 import uz.doston.springcrm.entity.project.Project;
 import uz.doston.springcrm.entity.project.ProjectColumn;
 import uz.doston.springcrm.entity.project.ProjectMember;
-import uz.doston.springcrm.entity.task.Task;
 import uz.doston.springcrm.mapper.project.ProjectColumnMapper;
 import uz.doston.springcrm.mapper.project.ProjectMapper;
+import uz.doston.springcrm.mapper.task.TaskMapper;
 import uz.doston.springcrm.repository.column.ProjectColumnRepository;
 import uz.doston.springcrm.repository.project.ProjectMemberRepository;
 import uz.doston.springcrm.repository.project.ProjectRepository;
@@ -19,8 +18,8 @@ import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
 import uz.doston.springcrm.service.base.GenericService;
 
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class ProjectService extends AbstractService<ProjectMapper, ProjectRepository>
@@ -29,6 +28,7 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
 
     private ProjectColumnRepository columnRepository;
     private ProjectColumnMapper columnMapper;
+    private final TaskMapper taskMapper;
 
     private ProjectMemberRepository projectMemberRepository;
 
@@ -36,11 +36,12 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
                           ProjectRepository repository,
                           ProjectColumnRepository columnRepository,
                           ProjectColumnMapper columnMapper,
-                          ProjectMemberRepository projectMemberRepository) {
+                          TaskMapper taskMapper, ProjectMemberRepository projectMemberRepository) {
         super(mapper, repository);
 
         this.columnRepository = columnRepository;
         this.columnMapper = columnMapper;
+        this.taskMapper = taskMapper;
         this.projectMemberRepository = projectMemberRepository;
     }
 
@@ -61,39 +62,33 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
         repository.save(project);
     }
 
-
-//    public List<Task> getAllTasks(Long id) {
-//       return taskRepository.findAllByProjectId(id);
-//    }
-
-
     public Long getMembersId(Long id) {
         List<ProjectMember> projectMembers = projectMemberRepository.findProjectMembersByProjectId(id);
         return (long) projectMembers.size();
     }
 
 
-    public List<ProjectColumnDto> getAllColumns(Long id, List<Task> taskDtos) {
+    @Transactional
+    public List<ProjectColumnDto> getAllColumns(Long id) {
 
         List<ProjectColumn> columns = columnRepository.findProjectColumnsByProjectId(id);
-        List<ProjectColumnDto> columnDtos = columnMapper.toDto(columns);
-
-//        for (ProjectColumnDto columnDto : columnDtos) {
-//            for (Task taskDto : taskDtos) {
-//                if (taskDto.getColumnId().equals(columnDto.getId())) {
-//                    if (Objects.isNull(columnDto.getTasks())) {
-//                        columnDto.setTasks(List.of(taskDto));
-//                    } else {
-//                        columnDto.getTasks().add(taskDto);
-//                    }
-//                }
+        List<ProjectColumnDto> dtoList = columnMapper.toDto(columns);
+//        for (ProjectColumnDto dto : dtoList) {
+//            for (ProjectColumn column : columns) {
+//                dto.setTasks(column.getTasks());
+//                dto.setTasks(taskMapper.toDto(column.getTasks()));
 //            }
 //        }
-        return columnDtos;
+        return dtoList;
     }
 
 
-    public List<ProjectColumn> getAllColumnEntity(Long id){
+    public List<ProjectColumn> getAllColumnEntity(Long id) {
+        return columnRepository.findProjectColumnsByProjectId(id);
+    }
+
+    @Transactional
+    public List<ProjectColumn> getAllColumnsBy(Long id) {
         return columnRepository.findProjectColumnsByProjectId(id);
     }
 

@@ -16,7 +16,6 @@ public class ProjectDto extends BaseGenericDto {
 
     private String name;
 
-
     private String tzPath;
 
     private Long organizationId;
