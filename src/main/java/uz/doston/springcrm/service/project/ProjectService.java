@@ -7,6 +7,7 @@ import uz.doston.springcrm.dto.project.ProjectDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
 import uz.doston.springcrm.entity.project.Project;
 import uz.doston.springcrm.entity.project.ProjectColumn;
+import uz.doston.springcrm.entity.project.ProjectMember;
 import uz.doston.springcrm.mapper.project.ProjectColumnMapper;
 import uz.doston.springcrm.mapper.project.ProjectMapper;
 import uz.doston.springcrm.mapper.task.TaskMapper;
@@ -61,9 +62,10 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
         repository.save(project);
     }
 
-//    public List<Long> getMembersId(Long id) {
-//        return projectMemberRepository.findProjectMembersByProjectId(id);
-//    }
+    public Long getMembersId(Long id) {
+        List<ProjectMember> projectMembers = projectMemberRepository.findProjectMembersByProjectId(id);
+        return (long) projectMembers.size();
+    }
 
 
     @Transactional
