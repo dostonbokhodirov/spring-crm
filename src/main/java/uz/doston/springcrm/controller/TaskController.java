@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import uz.doston.springcrm.dto.column.ProjectColumnDto;
 import uz.doston.springcrm.dto.task.TaskCreateDto;
-import uz.doston.springcrm.dto.task.TaskDto;
 import uz.doston.springcrm.dto.task.TaskUpdateDto;
+import uz.doston.springcrm.service.comment.CommentService;
 import uz.doston.springcrm.service.project.ProjectColumnService;
 import uz.doston.springcrm.service.task.TaskService;
 
@@ -16,11 +16,13 @@ import uz.doston.springcrm.service.task.TaskService;
 public class TaskController extends AbstractController<TaskService> {
 
     private final ProjectColumnService columnService;
+    private final CommentService commentService;
 
 
-    public TaskController(TaskService service, ProjectColumnService columnService) {
+    public TaskController(TaskService service, ProjectColumnService columnService, CommentService commentService) {
         super(service);
         this.columnService = columnService;
+        this.commentService = commentService;
     }
 
 
@@ -65,8 +67,8 @@ public class TaskController extends AbstractController<TaskService> {
 
     @PostMapping(value = "detail/{id}")
     public String get(Model model, @PathVariable(value = "id") Long id) {
-        TaskDto taskDto = service.get(id);
-        model.addAttribute("task", taskDto);
+        model.addAttribute("task", service.get(id));
+        model.addAttribute("comments", commentService.getAllByTaskId(id));
         return "task/detail";
     }
 

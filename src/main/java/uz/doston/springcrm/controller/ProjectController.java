@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import uz.doston.springcrm.dto.project.ProjectCreateDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
 import uz.doston.springcrm.dto.task.TaskDto;
-import uz.doston.springcrm.service.project.ProjectColumnService;
 import uz.doston.springcrm.service.project.ProjectService;
 import uz.doston.springcrm.service.task.TaskService;
 
@@ -17,15 +16,10 @@ import java.util.List;
 @RequestMapping(value = "/project/*")
 public class ProjectController extends AbstractController<ProjectService> {
 
-    private ProjectColumnService columnService;
+    private final TaskService taskService;
 
-    private TaskService taskService;
-
-    public ProjectController(ProjectService service,
-                             ProjectColumnService columnService,
-                             TaskService taskService) {
+    public ProjectController(ProjectService service, TaskService taskService) {
         super(service);
-        this.columnService = columnService;
         this.taskService = taskService;
     }
 

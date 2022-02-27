@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Red+Hat+Display&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Red+Hat+Display&family=Rubik:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 <header>
@@ -57,7 +58,7 @@
         </nav>
 
         <div class="container">
-            <h4>Task name</h4>
+            <h4 th:text="${task.name}"></h4>
 
             <div class="contents">
                 <div class="content-actions">
@@ -109,8 +110,7 @@
                 </div>
                 <div class="container-box">
                     <div class="content-box">
-                        <p>Добавить статистику по задачам, часам.
-                            Сделать сбор статистики за текущий месяц и создание уведомления в последний день месяца.</p>
+                        <p th:text="${task.description}"></p>
                     </div>
                     <div class="content-box">
                         <textarea placeholder="Комментарий..." id="" cols="10" rows="3"></textarea>
@@ -119,7 +119,7 @@
 
                     <div class="content-box">
                         <div class="flex">
-                            <p class="box-text"> <img th:src="@{/imges/avatar.png}" alt="">Artur </p>
+                            <p class="box-text"><img th:src="@{/imges/avatar.png}" alt="">Artur </p>
                             <p>12/04/2021, 6:37 p.m</p>
                         </div>
 
