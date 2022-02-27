@@ -14,12 +14,13 @@ import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
 import uz.doston.springcrm.service.base.GenericService;
 
-import javax.swing.*;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+import static uz.doston.springcrm.service.organization.OrganizationLogoService.UPLOAD_DIRECTORY;
 
 @Service(value = "organizationService")
 public class OrganizationService extends AbstractService<OrganizationMapper, OrganizationRepository>
@@ -28,14 +29,18 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
 
     private final OrganizationLogoService logoService;
 
-    public OrganizationService(OrganizationMapper mapper, OrganizationRepository repository, OrganizationLogoService logoService) {
+    public OrganizationService(@Qualifier("organizationMapperImpl") OrganizationMapper mapper, OrganizationRepository repository, OrganizationLogoService logoService) {
         super(mapper, repository);
         this.logoService = logoService;
     }
 
+    public void delete(String code) {
+        Organization organization = repository.findByCode(code);
+        repository.deleteById(organization.getId());
+    }
+
     @Override
     public void delete(Long id) {
-
     }
 
     @Transactional
@@ -52,28 +57,32 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
     @Override
     public void update(OrganizationUpdateDto dto) throws IOException {
 
-        Optional<Organization> organization = repository.findById(dto.getId());
-        mapper.fromUpdateDto(dto, organization.get());
+        Organization organization = repository.findByCode(dto.getCode());
+        mapper.fromUpdateDto(dto, organization);
 
         if (Objects.nonNull((dto.getLogo()))) {
             Logo logo = logoService.create(dto.getLogo());//TODO eski logoniyoqotish kerak filedan
-            organization.get().setLogo(logo);
+            organization.setLogo(logo);
         }
-        repository.save(organization.get());
+        repository.save(organization);
     }
 
     @Override
     public List<OrganizationDto> getAll() {
         List<Organization> organizations = repository.findAll();
         List<OrganizationDto> organizationDtos = mapper.toDto(organizations);
-        inputPathLogo(organizationDtos);
 
+        inputPathLogo(organizationDtos);
         return organizationDtos;
     }
 
     @Override
     public OrganizationDto get(Long id) {
-        return null;
+        Optional<Organization> organization = repository.findById(id);
+        OrganizationDto organizationDto = mapper.toDto(organization.get());
+        Logo logo = organization.get().getLogo();
+        organizationDto.setLogoPath(UPLOAD_DIRECTORY + "/" + logo.getGeneratedName() + "." + logo.getFormat());
+        return organizationDto;
     }
 
     private void inputPathLogo(List<OrganizationDto> organizationDtos) {

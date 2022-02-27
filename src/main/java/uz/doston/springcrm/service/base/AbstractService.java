@@ -14,4 +14,9 @@ public abstract class AbstractService<M extends BaseMapper, R extends BaseReposi
         this.mapper = mapper;
         this.repository = repository;
     }
+    public AbstractService(R repository) {
+        this.mapper = null;
+        this.repository = repository;
+    }
+
 }

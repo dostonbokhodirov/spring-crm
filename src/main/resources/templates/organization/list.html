@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragment.html :: header('Organizations')">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="../../static/css/organization/delete.css">
+
 </head>
 <body class="myb">
 <section th:include="fragment.html :: navbar"></section>
@@ -25,16 +26,53 @@
                 <td th:text="${organization.name}"></td>
                 <td><a href="#" class='fas fa-map-marker-alt' style='font-size:24px'>📍</a></td>
                 <td>
-                        <img width="100%" alt="image" th:src="${organization.logoPath}">
+                    <img width="100%" alt="image" th:src="${organization.logoPath}">
+                </td>
+                <td >
+                    <form  th:action="@{'/organization/update/' + ${organization.code}}" th:method="get">
+                        <button type="submit" class="deletebtn">Update</button>
+                    </form>
+
+                </td>
+                <td>
+                    <button onclick="document.getElementById('id01').style.display='block'">delete</button>
+                    <div id="id01" class="modal">
+                        <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                              title="Close Modal">&times;</span>
+                        <form class="modal-content" th:action="@{'/organization/delete/' + ${organization.code}}"
+                        th:method="post" !important>
+                        <div class="container">
+                            <h1>Delete organization</h1>
+                            <p>Are you sure you want to delete this organization?</p>
+
+                            <div class="clearfix">
+                                <button type="button" class="cancelbtn"
+                                        onclick="document.getElementById('id01').style.display='none'">Cancel
+                                </button>
+                                <button type="submit" class="deletebtn">Delete</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
                 </td>
             </tr>
             </tbody>
-            <img src="../../logo/da38d302-a5a8-4855-a19d-de21ec6e1345.jpg" height="101" width="1038"/>
         </table>
         <a th:href="@{/organization/create}" class="btn btn-success">➕ New Organization</a>
     </div>
 </div>
 
+<script>
+    // Get the modal
+    const modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 <section th:include="fragment.html :: js-files"></section>
 </body>
 </html>
