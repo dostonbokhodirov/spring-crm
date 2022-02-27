@@ -82,16 +82,20 @@
                             <img th:src="@{/imges/plus-circle.png}" alt="">
                         </div>
                         <div class="todo-box" th:each="task,iterTask : ${column.tasks}">
-                            <h4 th:utext="${task.name}">
-                                <button class="medium" th:utext="${task.level}"></button>
-                            </h4>
-                            <div class="task-participants" th:each="member,iterMember : ${task.taskMembers}">
-                                <p><b>Participant:</b><span th:utext="${member.username}"></span></p>
-                            </div>
+                            <form th:action="@{/task/detail/{id}(id=${task.id})}" method="post">
+                                <button type="submit" style="border: none">
+                                    <p th:utext="${task.name}">
+                                        <button class="medium" th:utext="${task.level}"></button>
+                                    </p>
+                                    <div class="task-participants" th:each="member,iterMember : ${task.taskMembers}">
+                                        <p><b>Participant:</b><span th:utext="${member.username}"></span></p>
+                                    </div>
+                                </button>
+                            </form>
                         </div>
-<!--                        <form th:action="@{/task/create/{id}/(id=${task.columnId})}">-->
-<!--                            <input type="submit" class="btn btn-primary" value="➕" />-->
-<!--                        </form>-->
+                        <!--                        <form th:action="@{/task/create/{id}/(id=${task.columnId})}">-->
+                        <!--                            <input type="submit" class="btn btn-primary" value="➕" />-->
+                        <!--                        </form>-->
                     </div>
                 </div>
             </div>

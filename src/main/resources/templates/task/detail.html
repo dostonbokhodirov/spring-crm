@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index html one</title>
-    <link th:href="@{/css/index2.css}" rel="stylesheet">
+    <title>Task Detail</title>
+    <link th:href="@{/css/index3.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Red+Hat+Display&family=Rubik:wght@400;500;600;700&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Red+Hat+Display&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -55,96 +54,126 @@
                 </div>
 
             </div>
-
         </nav>
 
         <div class="container">
-            <h3>Project name</h3>
+            <h4>Task name</h4>
 
             <div class="contents">
-                <div class="content">
-                    <div class="box">
-                        <p><b>Date added:</b> <span> 12/04/2021</span></p>
-                        <p><b>Deadline:</b><span>12/04/2021 </span></p>
-                        <p><b>Participants:</b><span>12/04/2021 </span></p>
+                <div class="content-actions">
+                    <h5>Actions</h5>
+                    <div class="actions-box">
+                        <h6>CRM system design</h6>
+                        <p><b>Activity: </b>12/04/2021, 6:37 p.m </p>
+                        <p>Приступил(-а) к задаче</p>
+                        <span>
+                                <img th:src="@{/imges/Ellipse.png}" alt="">Azhar
+                            </span>
                     </div>
-                    <div class="content-box">
-                        <p>Менеджер для внутреннего пользования, предназначенный для учета статистики и трекинга задач.
-                        </p>
+
+                    <div class="actions-box">
+                        <h6>CRM system design</h6>
+                        <p><b>Activity: </b>12/04/2021, 6:37 p.m </p>
+                        <p>Приступил(-а) к задаче</p>
+                        <span>
+                                <img th:src="@{/imges/Ellipse.png}" alt="">Azhar
+                            </span>
                     </div>
-                    <div class="boxs">
-                        <p><b>All tasks:</b> 1</p>
-                        <p><b>Done:</b> 1</p>
-                        <p><b>Frozen:</b> 1</p>
+
+                    <div class="actions-box">
+                        <h6>CRM system design</h6>
+                        <p><b>Activity: </b>12/04/2021, 6:37 p.m </p>
+                        <p>Приступил(-а) к задаче</p>
+                        <span>
+                                <img th:src="@{/imges/Ellipse.png}" alt="">Azhar
+                            </span>
+                    </div>
+
+                    <div class="actions-box">
+                        <h6>CRM system design</h6>
+                        <p><b>Activity: </b>12/04/2021, 6:37 p.m </p>
+                        <p>Приступил(-а) к задаче</p>
+                        <span>
+                                <img th:src="@{/imges/Ellipse.png}" alt="">Azhar
+                            </span>
+                    </div>
+
+                    <div class="actions-box">
+                        <h6>CRM system design</h6>
+                        <p><b>Activity: </b>12/04/2021, 6:37 p.m </p>
+                        <p>Приступил(-а) к задаче</p>
+                        <span>
+                                <img th:src="@{/imges/Ellipse.png}" alt="">Azhar
+                            </span>
                     </div>
                 </div>
+                <div class="container-box">
+                    <div class="content-box">
+                        <p>Добавить статистику по задачам, часам.
+                            Сделать сбор статистики за текущий месяц и создание уведомления в последний день месяца.</p>
+                    </div>
+                    <div class="content-box">
+                        <textarea placeholder="Комментарий..." id="" cols="10" rows="3"></textarea>
+                        <button type="submit">Опубликовать</button>
+                    </div>
 
-                <div class="todoContainer">
-                    <div class="todoContent-box">
-                        <div class="todo-img">
-                            <p>To do</p>
-                            <img th:src="@{/imges/plus-circle.png}" alt="">
-                        </div>
-                        <div class="todo-box">
-                            <h4>CRM system design
-                                <button class="medium">Medium</button>
-                            </h4>
-                            <p><span>Participant:  </span>Azhar</p>
-                            <p><span>Participant:  </span>Azhar</p>
-                        </div>
-
-                        <div class="todo-box">
-                            <h4>CRM system design
-                                <button class="low">Low</button>
-                            </h4>
-                            <p><span>Participant:  </span>Azhar</p>
-                            <p><span>Participant:  </span>Azhar</p>
+                    <div class="content-box">
+                        <div class="flex">
+                            <p class="box-text"> <img th:src="@{/imges/avatar.png}" alt="">Artur </p>
+                            <p>12/04/2021, 6:37 p.m</p>
                         </div>
 
-                        <div class="todo-box">
-                            <h4>CRM system design
-                                <button class="high">High</button>
-                            </h4>
-                            <p><span>Participant:  </span>Azhar</p>
-                            <p><span>Participant:  </span>Azhar</p>
+                        <span>1. Добавлены шаблонные теги для подсчёта часов, потраченных на закрытые задачи.</span>
+                    </div>
+                </div>
+                <div class="content-status">
+                    <div class="status">
+                        <div class="status-text">
+                            <p>Priority:</p>
+                            <button class="low">Low</button>
+                        </div>
+
+                        <div class="status-text">
+                            <p>Priority:</p>
+                            <span>Frozen</span>
+                        </div>
+
+                        <div class="status-text">
+                            <p>Priority:</p>
+                            <span>12/04/2021</span>
+                        </div>
+
+                        <div class="status-text">
+                            <p>Priority:</p>
+                            <span>21/04/2021</span>
+                        </div>
+
+                        <div class="status-text">
+                            <p>Priority:</p>
+                            <span>Adyl, Azhar, Arthur</span>
                         </div>
                     </div>
-                    <div class="todoContent-box">
-                        <div class="todo-img">
-                            <p>To do</p>
-                        </div>
-                        <div class="todo-box">
-                            <h4>CRM system design
-                                <button class="low">Low</button>
-                            </h4>
-                            <p><span>Participant:  </span>Azhar</p>
-                            <p><span>Participant:  </span>Azhar</p>
-                        </div>
 
-                        <div class="todo-box">
-                            <h4>CRM system design
-                                <button class="low">Low</button>
-                            </h4>
-                            <p><span>Participant:  </span>Azhar</p>
-                            <p><span>Participant:  </span>Azhar</p>
-                        </div>
-                    </div>
-                    <div class="todoContent-box">
-                        <div class="todo-img">
-                            <p>To do</p>
-                        </div>
-                    </div>
-                    <div class="todoContent-box">
-                        <div class="todo-img">
-                            <p>To do</p>
-                        </div>
-                        <div class="todo-box">
-                            <h4>CRM system design
-                                <button class="low">Low</button>
-                            </h4>
-                            <p><span>Participant:  </span>Azhar</p>
-                            <p><span>Participant:  </span>Azhar</p>
-                        </div>
+                    <div class="btn">
+                        <button type="submit">Change the priority
+                            <img th:src="@{/imges/down.png}" alt="">
+                        </button>
+
+                        <button type="submit">Change the priority
+                            <img th:src="@{/imges/down.png}" alt="">
+                        </button>
+
+                        <button type="submit">
+                            <img th:src="@{/imges/usercheck.png}" alt="">Become a participant
+                        </button>
+
+                        <button type="submit">
+                            <img th:src="@{/imges/ion_snow.png}" alt="">Freeze the task
+                        </button>
+
+                        <button type="submit">
+                            <img th:src="@{/imges/check.png}" alt="">Close task
+                        </button>
                     </div>
                 </div>
             </div>

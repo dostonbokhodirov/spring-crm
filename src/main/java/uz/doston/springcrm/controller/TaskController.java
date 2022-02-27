@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import uz.doston.springcrm.dto.column.ProjectColumnDto;
 import uz.doston.springcrm.dto.task.TaskCreateDto;
+import uz.doston.springcrm.dto.task.TaskDto;
 import uz.doston.springcrm.dto.task.TaskUpdateDto;
 import uz.doston.springcrm.service.project.ProjectColumnService;
 import uz.doston.springcrm.service.task.TaskService;
@@ -62,9 +63,10 @@ public class TaskController extends AbstractController<TaskService> {
         return "redirect:/project/list";
     }
 
-    @GetMapping(value = "detail/{id}")
+    @PostMapping(value = "detail/{id}")
     public String get(Model model, @PathVariable(value = "id") Long id) {
-        model.addAttribute("task", service.get(id));
+        TaskDto taskDto = service.get(id);
+        model.addAttribute("task", taskDto);
         return "task/detail";
     }
 
