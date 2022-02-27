@@ -52,4 +52,8 @@ public class Task extends Auditable {
     @Column
     private boolean completed = false;
 
+    @Column
+    private boolean frozen = false;
+
+
 }

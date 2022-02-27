@@ -10,6 +10,7 @@ import uz.doston.springcrm.entity.project.ProjectColumn;
 import uz.doston.springcrm.mapper.project.ProjectColumnMapper;
 import uz.doston.springcrm.mapper.project.ProjectMapper;
 import uz.doston.springcrm.repository.column.ProjectColumnRepository;
+import uz.doston.springcrm.repository.project.ProjectMemberRepository;
 import uz.doston.springcrm.repository.project.ProjectRepository;
 import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
@@ -22,19 +23,21 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
         implements GenericCrudService<ProjectCreateDto, ProjectUpdateDto>, GenericService<ProjectDto> {
 
 
-
     private ProjectColumnRepository columnRepository;
     private ProjectColumnMapper columnMapper;
+
+    private ProjectMemberRepository projectMemberRepository;
 
     public ProjectService(ProjectMapper mapper,
                           ProjectRepository repository,
                           ProjectColumnRepository columnRepository,
-                          ProjectColumnMapper columnMapper) {
+                          ProjectColumnMapper columnMapper,
+                          ProjectMemberRepository projectMemberRepository) {
         super(mapper, repository);
 
         this.columnRepository = columnRepository;
         this.columnMapper = columnMapper;
-
+        this.projectMemberRepository = projectMemberRepository;
     }
 
     @Override
@@ -60,9 +63,9 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
 //    }
 
 
-//    public List<Long> getMembersId(Long id) {
-//        return projectMemberRepository.findProjectMembersByProjectId(id);
-//    }
+    public List<Long> getMembersId(Long id) {
+        return projectMemberRepository.findProjectMembersByProjectId(id);
+    }
 
 
     public List<ProjectColumnDto> getAllColumns(Long id) {

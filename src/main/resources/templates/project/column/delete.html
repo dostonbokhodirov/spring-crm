@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment.html :: header('Project Delete Page')">
+</head>
+<body>
+<section th:include="fragment.html :: navbar"></section>
+<main>
+
+    <h1>Delete Todo Page</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-8 mx-auto">
+                <ul>
+                    <li th:text="${project.name}"></li>
+                    <li th:text="${project.tzPath}"></li>
+                </ul>
+                <form method="post" th:action="@{/project/delete/{id}(id=${project.id})}">
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                    <a th:href="@{/}" class="btn btn-warning">No</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<section th:include="fragment.html :: js-files"></section>
+</body>
+</html>
