@@ -67,22 +67,9 @@ public class ProjectController extends AbstractController<ProjectService> {
 
     @PostMapping(value = "detail/{id}")
     public String get(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("project", service.get(id));
-        return "project/detail";
-    }
-
-    @GetMapping(value = "list")
-    public String getAll(Model model) {
-        model.addAttribute("projects", service.getAll());
-        return "project/list";
-    }
-
-    @RequestMapping(value = "{id}/column/list", method = RequestMethod.GET)
-    public String getAllColumns(@PathVariable("id") Long id, Model model) {
         List<ProjectColumnDto> allColumns = columnService.getAllColumns(id);
         List<TaskDto> allTasks = taskService.getAllTasks(id);
         List<Long> membersId = service.getMembersId(id);
-//        List<AuthUserDto> allUsers = userService.getAllUsers(membersId);
 
         int frozenTasks = 0;
         for (TaskDto task : allTasks) {
@@ -99,16 +86,16 @@ public class ProjectController extends AbstractController<ProjectService> {
         model.addAttribute("participants",membersId.size());
         model.addAttribute("tasksCount", taskService.getAllTasks(id).size());
         model.addAttribute("doneTasks", doneTasks);
-        model.addAttribute("columns", service.getAllColumns(id));
+//        model.addAttribute("columns", service.getAllColumns(id));
+        model.addAttribute("columns", service.getAllColumnsBy(id));
 
-        return "project/column/list";
+        return "project/detail";
     }
 
-//
-//    @GetMapping(value = "{id}/task/list")
-//    public String getTasksList(@PathVariable("id") Long id,Model model) {
-//        model.addAttribute("tasks",service.getAllTasks(id));
-//
-//        return "task/index2";
-//    }
+    @GetMapping(value = "list")
+    public String getAll(Model model) {
+        model.addAttribute("projects", service.getAll());
+        return "project/list";
+    }
+
 }

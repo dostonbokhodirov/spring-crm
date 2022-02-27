@@ -25,7 +25,7 @@ public class ProjectColumn extends Auditable {
     @Column(nullable = false, unique = true, name = "order_number")
     private Long orderNumber;
 
-    @OneToMany(mappedBy = "columnId")
+    @OneToMany(mappedBy = "columnId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Task> tasks;
 
     @OneToOne

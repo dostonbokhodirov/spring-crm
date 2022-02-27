@@ -9,6 +9,7 @@ import uz.doston.springcrm.entity.project.Project;
 import uz.doston.springcrm.entity.project.ProjectColumn;
 import uz.doston.springcrm.mapper.project.ProjectColumnMapper;
 import uz.doston.springcrm.mapper.project.ProjectMapper;
+import uz.doston.springcrm.mapper.task.TaskMapper;
 import uz.doston.springcrm.repository.column.ProjectColumnRepository;
 import uz.doston.springcrm.repository.project.ProjectMemberRepository;
 import uz.doston.springcrm.repository.project.ProjectRepository;
@@ -16,6 +17,7 @@ import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
 import uz.doston.springcrm.service.base.GenericService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -25,6 +27,7 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
 
     private ProjectColumnRepository columnRepository;
     private ProjectColumnMapper columnMapper;
+    private final TaskMapper taskMapper;
 
     private ProjectMemberRepository projectMemberRepository;
 
@@ -32,11 +35,12 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
                           ProjectRepository repository,
                           ProjectColumnRepository columnRepository,
                           ProjectColumnMapper columnMapper,
-                          ProjectMemberRepository projectMemberRepository) {
+                          TaskMapper taskMapper, ProjectMemberRepository projectMemberRepository) {
         super(mapper, repository);
 
         this.columnRepository = columnRepository;
         this.columnMapper = columnMapper;
+        this.taskMapper = taskMapper;
         this.projectMemberRepository = projectMemberRepository;
     }
 
@@ -57,22 +61,28 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
         repository.save(project);
     }
 
-
-//    public List<Task> getAllTasks(Long id) {
-//       return taskRepository.findAllByProjectId(id);
-//    }
-
-
     public List<Long> getMembersId(Long id) {
         return projectMemberRepository.findProjectMembersByProjectId(id);
     }
 
-
+    @Transactional
     public List<ProjectColumnDto> getAllColumns(Long id) {
 
         List<ProjectColumn> columns = columnRepository.findProjectColumnsByProjectId(id);
-        return columnMapper.toDto(columns);
+        List<ProjectColumnDto> dtoList = columnMapper.toDto(columns);
+//        for (ProjectColumnDto dto : dtoList) {
+//            for (ProjectColumn column : columns) {
+//                dto.setTasks(column.getTasks());
+//                dto.setTasks(taskMapper.toDto(column.getTasks()));
+//            }
+//        }
+        return dtoList;
 
+    }
+
+    @Transactional
+    public List<ProjectColumn> getAllColumnsBy(Long id) {
+        return columnRepository.findProjectColumnsByProjectId(id);
     }
 
 
