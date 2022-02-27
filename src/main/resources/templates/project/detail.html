@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index html one</title>
-    <link rel="stylesheet" href="../../../static/css/index2.css">
+    <link th:href="@{/css/index2.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
             <i class="fas fa-bars"></i>
         </div>
         <div class="logo">
-            <img src="../../../static/imges/logo.png" alt="">
+            <img th:src="@{/imges/logo.png}" alt="">
         </div>
 
         <div class="link">
@@ -61,18 +61,17 @@
         <div class="container" th:object="${project}">
             <h3 th:text="${project.name}"></h3>
 
-<!--            <form class="ml-3" th:action="@{/project/close/{id}(id=${project.id})}" method="post">-->
-<!--                <button type="submit" style="border: none" class="box qwerty">-->
-<!--                    <p th:text="Close"></p>-->
-<!--                </button>-->
-<!--            </form>-->
+            <!--            <form class="ml-3" th:action="@{/project/close/{id}(id=${project.id})}" method="post">-->
+            <!--                <button type="submit" style="border: none" class="box qwerty">-->
+            <!--                    <p th:text="Close"></p>-->
+            <!--                </button>-->
+            <!--            </form>-->
 
-<!--            <form class="ml-3" th:action="@{/project/delete/{id}(id=${project.id})}" method="post">-->
-<!--                <button type="submit" style="border: none" class="box qwerty">-->
-<!--                    <p th:text="Delete"></p>-->
-<!--                </button>-->
-<!--            </form>-->
-
+            <!--            <form class="ml-3" th:action="@{/project/delete/{id}(id=${project.id})}" method="post">-->
+            <!--                <button type="submit" style="border: none" class="box qwerty">-->
+            <!--                    <p th:text="Delete"></p>-->
+            <!--                </button>-->
+            <!--            </form>-->
 
 
             <div class="contents" th:object="${participants}">
@@ -104,7 +103,7 @@
                         <div class="todoContent-box">
                             <div class="todo-img">
                                 <p th:utext="${column.name}"></p>
-                                <img src="../../../static/imges/plus-circle.png">
+                                <img th:src="@{/imges/plus-circle.png}">
                             </div>
 
                             <td th:each="task,iter : ${column.tasks}">
@@ -116,17 +115,11 @@
                                     <div class="task-participants" th:each="member,iterMember : ${task.taskMembers}">
                                         <p><span>Participant:  </span> <b th:utext="${member.username}"></b></p>
                                     </div>
-
                                 </div>
                             </td>
                         </div>
-
                     </tr>
-
-
                 </div>
-
-
             </div>
         </div>
     </aside>

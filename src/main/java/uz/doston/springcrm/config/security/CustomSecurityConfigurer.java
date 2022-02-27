@@ -22,14 +22,8 @@ import static org.springframework.http.HttpMethod.POST;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class CustomSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
-
-    public static final String[] WHITE_LIST = {"/auth/login", "/error", "/auth/register","/project/detail/1"};
+    public static final String[] WHITE_LIST = {"/auth/login", "/error", "/auth/register","/project/**", "/task/**"};
     public static final String[] WHITE_LIST_RESOURCE = {"/webjars/**", "/css/**", "/js/**", "/img/**"};
-//    @Value(value = "${remember.me.token.key}")
-//    private String rememberMeTokenKey;
-//
-//    @Value(value = "${remember.me.token.expiry}")
-//    private int rememberMeTokenExpiry;
 
     private int rememberMeTokenExpiryInSeconds;
 
@@ -41,12 +35,10 @@ public class CustomSecurityConfigurer extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
-
     @PostConstruct
     public void init() {
         this.rememberMeTokenExpiryInSeconds = (int) TimeUnit.DAYS.toSeconds(40);
     }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -89,7 +81,6 @@ public class CustomSecurityConfigurer extends WebSecurityConfigurerAdapter {
                                 .logoutSuccessHandler(new LogoutSuccessHandler())
                                 .logoutSuccessUrl("/auth/login"));
     }
-
 
     @Override
     public void configure(WebSecurity web) throws Exception {

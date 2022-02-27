@@ -64,7 +64,7 @@ public class ProjectController extends AbstractController<ProjectService> {
         return "redirect:project/list";
     }
 
-    @GetMapping(value = "detail/{id}")
+    @PostMapping(value = "detail/{id}")
     public String get(Model model, @PathVariable("id") Long id) {
         List<TaskDto> allTasks = taskService.getAllTasks(id);
         Long membersId = service.getMembersId(id);
@@ -88,27 +88,10 @@ public class ProjectController extends AbstractController<ProjectService> {
         return "project/detail";
     }
 
-
     @GetMapping(value = "list")
     public String getAll(Model model) {
         model.addAttribute("projects", service.getAll());
         return "project/list";
     }
 
-
-
-//    @GetMapping(value = "column/create")
-//    public String createColumn(Model model){
-//
-//    }
-
-
-
-//
-//    @GetMapping(value = "{id}/task/list")
-//    public String getTasksList(@PathVariable("id") Long id,Model model) {
-//        model.addAttribute("tasks",service.getAllTasks(id));
-//
-//        return "task/index2";
-//    }
 }
