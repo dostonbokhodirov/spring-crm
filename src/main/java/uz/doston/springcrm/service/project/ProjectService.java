@@ -61,9 +61,9 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
         repository.save(project);
     }
 
-    public List<Long> getMembersId(Long id) {
-        return projectMemberRepository.findProjectMembersByProjectId(id);
-    }
+//    public List<Long> getMembersId(Long id) {
+//        return projectMemberRepository.findProjectMembersByProjectId(id);
+//    }
 
 
     @Transactional

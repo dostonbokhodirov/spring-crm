@@ -84,7 +84,7 @@ public class ProjectController extends AbstractController<ProjectService> {
 //        List<AuthUserDto> allUsers = userService.getAllUsers(membersId);
 
         List<TaskDto> allTasks = taskService.getAllTasks(id);
-        Long membersId = service.getMembersId(id);
+//        Long membersId = service.getMembersId(id);
 
         int frozenTasks = 0;
         for (TaskDto task : allTasks) {
@@ -98,19 +98,13 @@ public class ProjectController extends AbstractController<ProjectService> {
 
         model.addAttribute("project", service.get(id));
         model.addAttribute("frozenTasks", frozenTasks);
-        model.addAttribute("participants",membersId);
+//        model.addAttribute("participants",membersId);
         model.addAttribute("tasksCount", taskService.getAllTasks(id).size());
         model.addAttribute("doneTasks", doneTasks);
 //        model.addAttribute("columns", service.getAllColumns(id));
         model.addAttribute("columns", service.getAllColumnsBy(id));
 
         return "project/detail";
-    }
-
-    @GetMapping(value = "list")
-    public String getAll(Model model) {
-        model.addAttribute("projects", service.getAll());
-        return "project/list";
     }
 
 }
