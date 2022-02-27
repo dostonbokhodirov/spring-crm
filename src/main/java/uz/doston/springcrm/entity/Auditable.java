@@ -5,13 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedBy;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,22 +22,21 @@ import java.util.Date;
 @AllArgsConstructor
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class Auditable {
+public abstract class Auditable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(unique = true, nullable = false)
+    protected Long id;
 
-    @Column
-    private boolean active;
-
+    @CreatedDate
     @CreationTimestamp
-    @Column(nullable = false)
-    private Date createdAt;
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP default NOW()")
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(nullable = false)
-    private Date updatedAt;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     @Column
     private Long createdBy;
@@ -42,5 +44,17 @@ public abstract class Auditable {
     @LastModifiedBy
     @Column
     private Long updatedBy;
+
+    @Column(name = "is_deleted", columnDefinition = "NUMERIC default 0")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean deleted;
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
 }

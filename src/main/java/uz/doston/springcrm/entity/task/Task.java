@@ -1,54 +1,59 @@
-//package uz.doston.springcrm.entity.task;
-//
-//
-//import lombok.Getter;
-//import lombok.Setter;
-//import uz.doston.springcrm.entity.Auditable;
-//import uz.doston.springcrm.entity.project.ProjectColumn;
-//import uz.doston.springcrm.entity.project.ProjectMember;
-//import uz.doston.springcrm.enums.Level;
-//
-//import javax.persistence.*;
-//import java.util.Date;
-//import java.util.List;
-//
-//@Getter
-//@Setter
-//@Entity
-//@Table(schema = "task")
-//public class Task extends Auditable {
-//
-//    @ManyToOne
-//    @JoinColumn(name="project_column_id", nullable=false)
-//    private ProjectColumn projectColumn;
-//
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            schema = "task",
-//            name = "task_member",
-//            joinColumns = @JoinColumn(name = "task_id"),
-//            inverseJoinColumns = @JoinColumn(name = "project_member_id"))
-//    private List<ProjectMember> projectMembers;
-//
-//
-//    @Column(nullable = false,name = "project_id")
-//    private Long projectId;
-//
-//    @Column(nullable = false,name = "owner_id")
-//    private Long ownerId;
-//
-//    @Column(nullable = false)
-//    private String name;
-//
-//    private String description;
-//
-//    private Level level;
-//
-//    private Date deadline;
-//
-//    private Integer priority;
-//
-//    private boolean completed;
-//
-//
-//}
+package uz.doston.springcrm.entity.task;
+
+
+import lombok.Getter;
+import lombok.Setter;
+import uz.doston.springcrm.entity.Auditable;
+import uz.doston.springcrm.entity.auth.AuthUser;
+import uz.doston.springcrm.enums.Level;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+@Getter
+@Setter
+@Entity
+@Table(schema = "task")
+public class Task extends Auditable {
+
+    @Column(nullable = false, name = "project_id")
+    private Long projectId;
+
+    @Column(name = "column_id")
+    private Long columnId;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            schema = "task",
+            name = "task_member",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<AuthUser> taskMembers;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false, name = "owner_id")
+    private Long ownerId;
+
+    @Column
+    private String description;
+
+    @Column
+    private Level level;
+
+    @Column(columnDefinition = "timestamp")
+    private Date deadline;
+
+    @Column
+    private Integer priority;
+
+    @Column
+    private boolean completed = false;
+
+    @Column
+    private boolean frozen = false;
+
+
+}
