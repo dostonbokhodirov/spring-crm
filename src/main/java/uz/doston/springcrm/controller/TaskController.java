@@ -3,12 +3,9 @@ package uz.doston.springcrm.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import uz.doston.springcrm.dto.task.TaskCreateDto;
-import uz.doston.springcrm.entity.task.Task;
+import uz.doston.springcrm.dto.task.TaskUpdateDto;
 import uz.doston.springcrm.service.task.TaskService;
 
 @Controller
@@ -19,47 +16,51 @@ public class TaskController extends AbstractController<TaskService> {
         super(service);
     }
 
-    @PostMapping(value ="create")
+    @PostMapping(value = "create")
     public String createPage(Model model) {
         model.addAttribute("task", new TaskCreateDto());
         return "task/create";
     }
 
-    @GetMapping(value="create")
-    public String createPage() {
-        return null;
+    @PostMapping(value = "")
+    public String create(@ModelAttribute TaskCreateDto dto) {
+        service.create(dto);
+        return "redirect:/project/list";
     }
 
-    @GetMapping(value="{id}/update")
-    public String updatePage(@PathVariable(value="id") Long id) {
-        return null;
+    @GetMapping(value = "{id}/update")
+    public String updatePage(Model model, @PathVariable(value = "id") Long id) {
+        model.addAttribute("task", service.get(id));
+        return "task/update";
     }
 
-    @PostMapping(value="{id}/update")
-    public String update(@PathVariable(value="id") Long id) {
-        return null;
+    @PostMapping(value = "{id}/update")
+    public String update(@ModelAttribute TaskUpdateDto dto, @PathVariable(value = "id") Long id) {
+        service.update(dto);
+        return "redirect:/project/list";
     }
 
-    @GetMapping(value="{id}/delete")
-    public String deletePage(@PathVariable(value="id") Long id) {
-        return null;
+    @GetMapping(value = "{id}/delete")
+    public String deletePage(Model model, @PathVariable(value = "id") Long id) {
+        model.addAttribute("task", service.get(id));
+        return "task/delete";
     }
 
-    @PostMapping(value="{id}/delete")
-    public String delete(@PathVariable(value="id") Long id) {
-        return null;
+    @DeleteMapping(value = "{id}/delete")
+    public String delete(@PathVariable(value = "id") Long id) {
+        service.delete(id);
+        return "redirect:/project/list";
     }
 
-    @GetMapping(value="detail{id}")
-    public String get(@PathVariable(value="id") Long id) {
-        return null;
+    @GetMapping(value = "detail{id}")
+    public String get(Model model, @PathVariable(value = "id") Long id) {
+        model.addAttribute("task", service.get(id));
+        return "task/detail";
     }
 
-    @GetMapping(value="list")
-    public String getAll() {
-        Task task = service.test();
-        System.out.println(task);
-        System.out.println(task.getTaskMembers());
-        return null;
+    @GetMapping(value = "list")
+    public String getAll(Model model) {
+        model.addAttribute("tasks", service.getAll());
+        return "task/list";
     }
 }

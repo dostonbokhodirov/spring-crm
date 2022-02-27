@@ -7,4 +7,5 @@ import uz.doston.springcrm.repository.BaseRepository;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long>, BaseRepository {
+
 }

@@ -11,7 +11,6 @@ import uz.doston.springcrm.service.base.AbstractService;
 import uz.doston.springcrm.service.base.GenericCrudService;
 import uz.doston.springcrm.service.base.GenericService;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -29,30 +28,30 @@ public class TaskService extends AbstractService<TaskMapper, TaskRepository> imp
 
     @Override
     public void delete(Long id) {
-
+        repository.deleteById(id);
     }
 
     @Override
     public void create(TaskCreateDto taskCreateDto) {
-
+        Task task = mapper.fromCreateDto(taskCreateDto);
+        repository.save(task);
     }
 
     @Override
-    public void update(TaskUpdateDto taskUpdateDto) throws IOException {
-
+    public void update(TaskUpdateDto taskUpdateDto) {
+        Task task = mapper.fromUpdateDto(taskUpdateDto);
+        repository.save(task);
     }
 
     @Override
     public List<TaskDto> getAll() {
-        return null;
+        List<Task> tasks = repository.findAll();
+        return mapper.toDto(tasks);
     }
 
     @Override
     public TaskDto get(Long id) {
-        return null;
-    }
-
-    public Task test() {
-        return repository.findTaskById(1L);
+        Task task = repository.findById(id).orElseThrow(() -> new RuntimeException("Task Not Found"));
+        return mapper.toDto(task);
     }
 }

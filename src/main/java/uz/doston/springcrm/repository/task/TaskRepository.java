@@ -12,7 +12,9 @@ public interface TaskRepository extends JpaRepository<Task, Long>, BaseRepositor
 
     List<Task> findAllByProjectId(Long id);
 
-    Task findTaskById(Long id);
-
-
+//    @Transactional
+//    @Modifying
+//    @Query(value = "update Task set column_id = :#{#dto.columnId}, " +
+//            "task = :#{#dto.columnId}")
+//    void update(@Param(value = "dto") TaskUpdateDto taskUpdateDto);
 }
