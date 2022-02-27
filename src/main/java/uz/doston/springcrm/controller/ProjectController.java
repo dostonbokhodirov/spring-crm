@@ -64,7 +64,7 @@ public class ProjectController extends AbstractController<ProjectService> {
         return "redirect:project/list";
     }
 
-    @PostMapping(value = "detail/{id}")
+    @GetMapping(value = "detail/{id}")
     public String get(Model model, @PathVariable("id") Long id) {
         List<TaskDto> allTasks = taskService.getAllTasks(id);
         Long membersId = service.getMembersId(id);
@@ -81,11 +81,10 @@ public class ProjectController extends AbstractController<ProjectService> {
 
         model.addAttribute("project", service.get(id));
         model.addAttribute("frozenTasks", frozenTasks);
-        model.addAttribute("participants", membersId);
+        model.addAttribute("participants",membersId);
         model.addAttribute("tasksCount", taskService.getAllTasks(id).size());
         model.addAttribute("doneTasks", doneTasks);
-//        model.addAttribute("columns", service.getAllColumns(id));
-        model.addAttribute("columns", service.getAllColumnsBy(id));
+        model.addAttribute("columns", service.getAllColumnEntity(id));
         return "project/detail";
     }
 
@@ -95,4 +94,41 @@ public class ProjectController extends AbstractController<ProjectService> {
         return "project/list";
     }
 
+//    @RequestMapping(value = "{id}/column/list", method = RequestMethod.GET)
+//    public String getAllColumns(@PathVariable("id") Long id, Model model) {
+//
+////        List<Task> allEntity = taskService.getAllEntity(id);
+////        List<ProjectColumnDto> allColumns = service.getAllColumns(id,allEntity);
+////        List<AuthUserDto> allUsers = userService.getAllUsers(membersId);
+//
+//        List<TaskDto> allTasks = taskService.getAllTasks(id);
+//        Long membersId = service.getMembersId(id);
+//
+//        int frozenTasks = 0;
+//        for (TaskDto task : allTasks) {
+//            if (task.isFrozen()) frozenTasks++;
+//        }
+//
+//        int doneTasks = 0;
+//        for (TaskDto allTask : allTasks) {
+//            if (allTask.isCompleted()) doneTasks++;
+//        }
+//
+//        model.addAttribute("project", service.get(id));
+//        model.addAttribute("frozenTasks", frozenTasks);
+//        model.addAttribute("participants",membersId);
+//        model.addAttribute("tasksCount", taskService.getAllTasks(id).size());
+//        model.addAttribute("doneTasks", doneTasks);
+//        model.addAttribute("columns", service.getAllColumnEntity(id));
+//
+//        return "detail";
+//    }
+
+//
+//    @GetMapping(value = "{id}/task/list")
+//    public String getTasksList(@PathVariable("id") Long id,Model model) {
+//        model.addAttribute("tasks",service.getAllTasks(id));
+//
+//        return "task/index2";
+//    }
 }
