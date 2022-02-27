@@ -23,8 +23,6 @@ public class OrganizationCreateDto implements BaseDto {
     @NotNull(message = "Please input logo")
     private MultipartFile logo;
 
-    private String code;
-
     private Point location;
 
 }

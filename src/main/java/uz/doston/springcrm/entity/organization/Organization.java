@@ -2,10 +2,12 @@ package uz.doston.springcrm.entity.organization;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.geo.Point;
 import uz.doston.springcrm.entity.Auditable;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -27,7 +29,7 @@ public class Organization extends Auditable {
     private String email;
 
     @Column
-    private String code;
+    private String code = UUID.randomUUID().toString().replace("-", "");
 
     @Column
     private Point location;

@@ -17,6 +17,10 @@ import javax.validation.constraints.Size;
 public class OrganizationDto extends BaseGenericDto {
     private String name;
 
+    private String code;
+
+    private String email;
+
     private Logo logo;
 
     private String logoPath;

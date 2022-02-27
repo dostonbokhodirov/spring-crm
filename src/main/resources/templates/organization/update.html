@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>register</title>
 
-    <link rel="stylesheet" href="../../assets/css/register.css">
+    <link rel="stylesheet" href="../../static/css/register.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="container" th:method="post">
-    <form th:action="@{/organization/update/ + ${dto.id}'z'}" th:method="post" th:object="${dto}"
+    <form th:action="@{'/organization/update/' + ${dto.code}}" th:method="post" th:object="${dto}"
           enctype="multipart/form-data"
     >
         <div class="login-text">
@@ -26,12 +26,12 @@
 
         <div class="login-input">
             <div>
-                <input th:name="name" type="text" placeholder="Name">
+                <input th:name="name" type="text" th:value="*{name}">
                 <span style="color: red" th:errors="*{name}"></span>
             </div>
 
             <div>
-                <input th:name="email" err type="email" placeholder="Email">
+                <input th:name="email" type="email" th:value="*{email}">
             </div>
 
             <div>
@@ -39,15 +39,15 @@
                 <span style="color: red" th:errors="*{logo}"></span>
             </div>
             <div>
-                <input th:name="location" type="text" placeholder="Location">
+                <input th:name="location" type="text" th:value="*{location}">
             </div>
 
 
         </div>
         <div class="goBack" id="link">
-            <a href="#">Back</a>
+            <a th:href="@{/list}">Back</a>
             <div class="login-button">
-                <button type="submit">Create</button>
+                <button type="submit">Update</button>
             </div>
         </div>
     </form>

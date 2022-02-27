@@ -49,8 +49,8 @@ public class TaskService extends AbstractService<TaskMapper, TaskRepository> imp
 
     @Override
     public List<TaskDto> getAll() {
-//        List<Task> tasks = repository.findAll();
-        List<Task> tasks = repository.findAllByProjectId(1L);
+        List<Task> tasks = repository.findAll();
+//        List<Task> tasks = repository.findAllByProjectId(1L);
         return mapper.toDto(tasks);
     }
 

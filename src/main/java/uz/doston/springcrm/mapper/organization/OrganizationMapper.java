@@ -12,13 +12,15 @@ import uz.doston.springcrm.mapper.BaseMapper;
 
 import java.util.List;
 
-@Component
+@Component(value = "organizationMapper")
 @Mapper(componentModel = "spring")
 public interface OrganizationMapper extends BaseMapper {
 
     OrganizationDto toDto(Organization organization);
 
     List<OrganizationDto> toDto(List<Organization> list);
+
+    Organization findByCode(String code);
 
     @Mapping(target = "logo", ignore = true)
     Organization fromCreateDto(OrganizationCreateDto organizationCreateDto);
