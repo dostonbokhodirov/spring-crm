@@ -41,6 +41,7 @@ public class Task extends Auditable {
     private String description;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Level level;
 
     @Column(columnDefinition = "timestamp")
