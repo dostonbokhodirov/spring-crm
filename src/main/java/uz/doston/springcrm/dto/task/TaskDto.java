@@ -33,4 +33,6 @@ public class TaskDto extends BaseGenericDto {
 
     private boolean completed;
 
+    private boolean frozen;
+
 }

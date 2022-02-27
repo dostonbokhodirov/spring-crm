@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index html one</title>
+    <link rel="stylesheet" href="../../../static/css/index2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Red+Hat+Display&family=Rubik:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<header>
+    <main>
+        <div class="menu-bar">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="logo">
+            <img src="../../../static/imges/logo.png" alt="">
+        </div>
+
+        <div class="link">
+            <a href="#"> -- Clients
+            </a>
+            <a href="#">Task manager</a>
+            <a href="#">Inbox</a>
+            <a href="#">Contacts</a>
+        </div>
+    </main>
+
+    <aside>
+        <nav>
+            <div class="input">
+                <div>
+                    <i class="fas fa-search"></i>
+                </div>
+
+                <input type="text" placeholder="Search">
+            </div>
+
+            <div class="user-information">
+                <div class="icon">
+                    <img src="../../../static/imges/bell.png" alt="">
+                    <i class="far fa-envelope"></i>
+                </div>
+
+                <div class="user">
+                    <img src="../../../static/imges/useer.png" alt="">
+                    <p>Azhar I.
+                        <i class="fas fa-angle-down"></i>
+                    </p>
+                </div>
+
+            </div>
+
+        </nav>
+
+        <div class="container" th:object="${project}, ${participants}">
+            <h3 th:text="${project.name}"></h3>
+
+            <div class="contents">
+                <div class="content">
+                    <div class="box">
+                        <p><b>Date added:</b> <span th:text="${project.createdAt}"> </span></p>
+                        <p><b>Deadline:</b><span th:text="${project.deadline}"> </span></p>
+                        <p><b>Participants:</b><span th:text="${participants}"></span></p>
+                    </div>
+                    <div class="content-box">
+                        <p>Менеджер для внутреннего пользования, предназначенный для учета статистики и трекинга задач.
+                        </p>
+                    </div>
+                    <div class="boxs" th:object="${frozenTasks}, ${tasksCount},${doneTasks}">
+                        <p th:text="${tasksCount}"><b>All tasks:</b></p>
+                        <p th:text="${doneTasks}"><b>Done:</b></p>
+                        <p th:text="${frozenTasks}"><b>Frozen:</b></p>
+                    </div>
+                </div>
+
+                <div class="todoContainer" th:each="column,iter : ${columns}">
+
+                    <div class="todoContent-box">
+                        <div class="todo-img">
+                            <p th:utext="${column.name}"></p>
+                            <img src="../../../static/imges/plus-circle.png" alt="">
+                        </div>
+                        <div class="todo-box" th:each="task,iterTask : ${column.tasks}">
+                            <h4 th:utext="${task.name}">
+                                <button class="medium" th:utext="${task.level}"></button>
+                            </h4>
+                            <div class="task-participants" th:each="member,iterMember : ${task.taskMembers}">
+                                <p th:utext="${member.username}"><span>Participant:  </span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </aside>
+
+</header>
+
+<script>
+    const menu = document.querySelector(".menu-bar")
+    const main = document.querySelector("main")
+    menu.addEventListener("click", () => {
+        main.classList.toggle("open")
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment.html :: header('Project Create Page')"></head>
+<body class="myb">
+<section th:include="fragment.html :: navbar"></section>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <form th:action="@{/project/create}" th:method="post" th:object="${project}">
+                <div class="form-group">
+                    <label for="name" class="form-label">Name</label>
+                    <input class="form-control" type="text" id="name" name="name"  /> <!--th:field="*{title}"-->
+                    <span style="color: red" th:errors="*{name}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="tzPath" class="form-label">Tz Path</label>
+                    <input class="form-control" type="text" id="tzPath" name="tzPath" /> <!--th:field="*{tzPath}"-->
+                    <span style="color: red" th:errors="*{tzPath}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="organizationId" class="form-label">Organization ID</label>
+                    <input class="form-control" type="text" id="organizationId" name="organizationId" /> <!--th:field="*{organizationId}"-->
+                    <span style="color: red" th:errors="*{organizationId}"></span>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="submit" value="save"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<section th:include="fragment.html :: js-files"></section>
+</body>
+</html>

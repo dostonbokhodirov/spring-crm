@@ -8,6 +8,7 @@ import uz.doston.springcrm.entity.Auditable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -24,6 +25,9 @@ public class Project extends Auditable {
 
     @Column(name = "organization_id")
     private Long organizationId;
+
+    @Column(nullable = false)
+    private LocalDateTime deadline;
 
     @Column
     private boolean closed;
