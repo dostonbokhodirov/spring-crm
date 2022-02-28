@@ -1,18 +1,11 @@
 package uz.doston.springcrm;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.transaction.annotation.Transactional;
-import uz.doston.springcrm.entity.auth.AuthRole;
-import uz.doston.springcrm.entity.auth.AuthUser;
 import uz.doston.springcrm.repository.auth.AuthRoleRepository;
 import uz.doston.springcrm.repository.auth.AuthUserRepository;
-
-import java.util.List;
-import java.util.UUID;
 
 @EnableJpaAuditing
 @SpringBootApplication
