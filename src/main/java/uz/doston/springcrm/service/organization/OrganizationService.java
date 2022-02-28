@@ -85,6 +85,18 @@ public class OrganizationService extends AbstractService<OrganizationMapper, Org
         return organizationDto;
     }
 
+    public OrganizationUpdateDto get(String code) {
+        Organization organization = repository.findByCode(code);
+        OrganizationUpdateDto organizationUpdateDto = new OrganizationUpdateDto();
+        organizationUpdateDto.setId(organization.getId());
+        organizationUpdateDto.setEmail(organization.getEmail());
+        organizationUpdateDto.setCode(organization.getCode());
+        organizationUpdateDto.setLocation(organization.getLocation());
+
+        return organizationUpdateDto;
+    }
+
+
     private void inputPathLogo(List<OrganizationDto> organizationDtos) {
         for (OrganizationDto organizationDto : organizationDtos) {
             organizationDto.setLogoPath(findLogoPathById(organizationDto.getLogo()));

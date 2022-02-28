@@ -10,14 +10,16 @@ import uz.doston.springcrm.entity.organization.Organization;
 import uz.doston.springcrm.repository.BaseRepository;
 
 import javax.persistence.Column;
+import javax.transaction.Transactional;
 
 @Repository
 public interface OrganizationRepository extends JpaRepository<Organization, Long>, BaseRepository {
 
+    @Transactional
     @Modifying
     @Query(value = "update Organization set name = :#{#dto.name}, code = :#{#dto.code}, logo = :#{#dto.logo}, location = :#{#dto.location}")
     void update(@Param(value = "dto") OrganizationUpdateDto organizationUpdateDto);
 
-
-    Organization findByCode(String code);
+    @Query(value = "select * from organization.organization where code = :code  ",nativeQuery = true)
+    Organization findByCode(@Param("code") String code);
 }

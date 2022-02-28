@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="container" th:method="post">
-    <form th:action="@{'/organization/update/' + ${dto.code}}" th:method="post" th:object="${dto}"
+    <form th:action="@{'/organization/update/' + ${organization.id}}" method="post" th:object="${organization}"
           enctype="multipart/form-data"
     >
         <div class="login-text">
@@ -25,13 +25,14 @@
         </div>
 
         <div class="login-input">
+
             <div>
-                <input th:name="name" type="text" th:value="*{name}">
+                <input name="name" type="text" th:value="*{name}">
                 <span style="color: red" th:errors="*{name}"></span>
             </div>
 
             <div>
-                <input th:name="email" type="email" th:value="*{email}">
+                <input name="email" type="email" th:value="*{email}">
             </div>
 
             <div>
@@ -39,7 +40,7 @@
                 <span style="color: red" th:errors="*{logo}"></span>
             </div>
             <div>
-                <input th:name="location" type="text" th:value="*{location}">
+                <input name="location" type="text" th:value="*{location}">
             </div>
 
 

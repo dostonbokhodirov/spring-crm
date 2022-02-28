@@ -56,19 +56,19 @@ public class OrganizationController extends AbstractController<OrganizationServi
 
     @RequestMapping(value = "update/{code}", method = RequestMethod.GET)
     public String updatePage(Model model, @PathVariable String code) {
-        OrganizationUpdateDto dto = new OrganizationUpdateDto();
-        dto.setCode(code);
-        model.addAttribute(dto);
+
+        model.addAttribute("organization", service.get(code));
+
         return "organization/update";
     }
 
     @SneakyThrows
-    @RequestMapping(value = "update/{code}", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute(name = "dto") OrganizationUpdateDto dto, BindingResult bindingResult, @PathVariable String code) {
-
+    @RequestMapping(value = "update/{id}", method = RequestMethod.POST)
+    public String update(@Valid @ModelAttribute OrganizationUpdateDto dto, BindingResult bindingResult, @PathVariable Long id) {
         if (bindingResult.hasErrors()) {
             return "organization/update";
         }
+        dto.setId(id);
         service.update(dto);
         return "redirect:/organization/list";
 
@@ -81,8 +81,10 @@ public class OrganizationController extends AbstractController<OrganizationServi
         return "redirect:/organization/list";
     }
 
-    @RequestMapping(value = "detail/{code}",method = RequestMethod.GET)
-    String detailsPage(){
+    @RequestMapping(value = "detail/{id}", method = RequestMethod.GET)
+    String detailsPage(Model model, @PathVariable Long id) {
+        OrganizationDto organizationDto = service.get(id);
+        model.addAttribute("organization", organizationDto);
         return "organization/detail";
     }
 }
