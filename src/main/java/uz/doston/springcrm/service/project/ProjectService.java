@@ -1,7 +1,9 @@
 package uz.doston.springcrm.service.project;
 
 import org.springframework.stereotype.Service;
+import uz.doston.springcrm.dto.column.ProjectColumnCreateDto;
 import uz.doston.springcrm.dto.column.ProjectColumnDto;
+import uz.doston.springcrm.dto.column.ProjectColumnUpdateDto;
 import uz.doston.springcrm.dto.project.ProjectCreateDto;
 import uz.doston.springcrm.dto.project.ProjectDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
@@ -104,4 +106,31 @@ public class ProjectService extends AbstractService<ProjectMapper, ProjectReposi
         Project project = repository.findById(id).orElseThrow(() -> new RuntimeException("Project Not Found"));
         return mapper.toDto(project);
     }
+
+
+    public void createColumn(Long id, ProjectColumnCreateDto dto){
+        ProjectColumn projectColumn = columnMapper.fromCreateDto(dto);
+        projectColumn.setProjectId(id);
+        columnRepository.save(projectColumn);
+    }
+
+
+    public ProjectColumnDto getColumn(Long columnId){
+        ProjectColumn projectColumn = columnRepository.findById(columnId).get();
+        return columnMapper.toDto(projectColumn);
+    }
+
+    public void deleteColumn(Long columnId){
+        columnRepository.deleteById(columnId);
+    }
+
+
+    public void updateColumn(ProjectColumnUpdateDto dto){
+
+        ProjectColumn projectColumn = columnMapper.fromUpdateDto(dto);
+        columnRepository.update(projectColumn);
+    }
+
+
+
 }

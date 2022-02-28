@@ -4,6 +4,8 @@ package uz.doston.springcrm.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import uz.doston.springcrm.dto.column.ProjectColumnCreateDto;
+import uz.doston.springcrm.dto.column.ProjectColumnUpdateDto;
 import uz.doston.springcrm.dto.project.ProjectCreateDto;
 import uz.doston.springcrm.dto.project.ProjectUpdateDto;
 import uz.doston.springcrm.dto.task.TaskDto;
@@ -29,17 +31,6 @@ public class ProjectController extends AbstractController<ProjectService> {
         this.taskService = taskService;
     }
 
-    @GetMapping(value = "create")
-    public String createPage(Model model) {
-        model.addAttribute("project", new ProjectCreateDto());
-        return "project/create";
-    }
-
-    @PostMapping(value = "")
-    public String create(@ModelAttribute ProjectCreateDto dto) {
-        service.create(dto);
-        return "redirect:/project/list";
-    }
 
     @GetMapping(value = "delete/{id}")
     public String deletePage(Model model, @PathVariable("id") Long id) {
@@ -81,7 +72,7 @@ public class ProjectController extends AbstractController<ProjectService> {
 
         model.addAttribute("project", service.get(id));
         model.addAttribute("frozenTasks", frozenTasks);
-        model.addAttribute("participants",membersId);
+        model.addAttribute("participants", membersId);
         model.addAttribute("tasksCount", taskService.getAllTasks(id).size());
         model.addAttribute("doneTasks", doneTasks);
         model.addAttribute("columns", service.getAllColumnEntity(id));
@@ -97,15 +88,49 @@ public class ProjectController extends AbstractController<ProjectService> {
 
 
 
-//    @GetMapping(value = "column/create")
-//    public String createColumn(Model model){
+
+    @GetMapping(value = "{id}/column/create")
+    public String createColumnPage( @PathVariable("id") Long id,Model model) {
+        model.addAttribute("column", new ProjectColumnCreateDto());
+        return "project/column/create";
+    }
+
+    @PostMapping(value = "{id}/column/create")
+    public String createColumn(@PathVariable("id") Long id,@ModelAttribute ProjectColumnCreateDto dto) {
+        service.createColumn(id,dto);
+        return "redirect:/project/detail";
+    }
+
+
+
+    @GetMapping(value = "{p_id}/column/delete/{c_id}")
+    public String deleteColumnPage(Model model, @PathVariable("p_id") Long p_id,@PathVariable("c_id") Long c_id) {
+        model.addAttribute("column", service.getColumn(c_id));
+        return "project/column/delete";
+    }
+
+    @RequestMapping(value = "{p_id}/column/delete/{c_id}", method = RequestMethod.DELETE)
+    public String deleteColumn(@PathVariable("p_id") Long p_id, @PathVariable("c_id") Long c_id ) {
+        service.deleteColumn(c_id);
+        return "redirect:project/detail";
+    }
+
+
+    @GetMapping(value = "{p_id}/column/update/{c_id}")
+    public String updateColumnPage(Model model, @PathVariable("p_id") Long p_id,@PathVariable("c_id") Long c_id) {
+        model.addAttribute("column", service.getColumn(c_id));
+        return "project/column/update";
+    }
+
+    @PostMapping(value = "{p_id}/column/update/{c_id}")
+    public String updateColumn(@ModelAttribute ProjectColumnUpdateDto dto, @PathVariable("p_id") Long p_id, @PathVariable("c_id") Long c_id) {
+        service.updateColumn(dto);
+        return "redirect:project/list";
+    }
+
 //
-//    }
+//    @GetMapping(value = "{id}/task/list")+
 
-
-
-//
-//    @GetMapping(value = "{id}/task/list")
 //    public String getTasksList(@PathVariable("id") Long id,Model model) {
 //        model.addAttribute("tasks",service.getAllTasks(id));
 //
