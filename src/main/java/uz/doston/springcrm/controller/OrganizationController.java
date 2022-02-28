@@ -39,7 +39,6 @@ public class OrganizationController extends AbstractController<OrganizationServi
 
     @GetMapping("create")
     public String createPage(Model model) {
-
         model.addAttribute("dto", new OrganizationCreateDto());
         return "organization/create";
     }
