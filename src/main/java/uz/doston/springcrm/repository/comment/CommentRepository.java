@@ -12,6 +12,7 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment, Long>, BaseRepository {
 
     @Modifying
-    @Query(value = "select * from Comment where task_id = :id", nativeQuery = true)
+    @Query(value = "select * from comment.comment where task_id = :id", nativeQuery = true)
+//    @Query(value = "select c from Comment c where c.taskId = :id")
     List<Comment> findAllByTaskId(@Param(value = "id") Long id);
 }

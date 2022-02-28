@@ -31,6 +31,18 @@ public class ProjectController extends AbstractController<ProjectService> {
         this.taskService = taskService;
     }
 
+    @GetMapping(value = "create")
+    public String createPage(Model model) {
+        model.addAttribute("project", new ProjectCreateDto());
+        return "project/create";
+    }
+
+    @PostMapping(value = "")
+    public String create(@ModelAttribute ProjectCreateDto dto) {
+        service.create(dto);
+        return "redirect:/project/list";
+    }
+
 
     @GetMapping(value = "delete/{id}")
     public String deletePage(Model model, @PathVariable("id") Long id) {
@@ -38,9 +50,10 @@ public class ProjectController extends AbstractController<ProjectService> {
         return "project/delete";
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
-    public String delete() {
-        return "redirect:project/list";
+    @PostMapping(value = "delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        service.delete(id);
+        return "redirect:/project/list";
     }
 
     @GetMapping(value = "update/{id}")
@@ -55,7 +68,7 @@ public class ProjectController extends AbstractController<ProjectService> {
         return "redirect:project/list";
     }
 
-    @GetMapping(value = "detail/{id}")
+    @PostMapping(value = "detail/{id}")
     public String get(Model model, @PathVariable("id") Long id) {
         List<TaskDto> allTasks = taskService.getAllTasks(id);
         Long membersId = service.getMembersId(id);
@@ -87,37 +100,34 @@ public class ProjectController extends AbstractController<ProjectService> {
     }
 
 
-
-
     @GetMapping(value = "{id}/column/create")
-    public String createColumnPage( @PathVariable("id") Long id,Model model) {
+    public String createColumnPage(@PathVariable("id") Long id, Model model) {
         model.addAttribute("column", new ProjectColumnCreateDto());
         return "project/column/create";
     }
 
     @PostMapping(value = "{id}/column/create")
-    public String createColumn(@PathVariable("id") Long id,@ModelAttribute ProjectColumnCreateDto dto) {
-        service.createColumn(id,dto);
+    public String createColumn(@PathVariable("id") Long id, @ModelAttribute ProjectColumnCreateDto dto) {
+        service.createColumn(id, dto);
         return "redirect:/project/detail";
     }
 
 
-
     @GetMapping(value = "{p_id}/column/delete/{c_id}")
-    public String deleteColumnPage(Model model, @PathVariable("p_id") Long p_id,@PathVariable("c_id") Long c_id) {
+    public String deleteColumnPage(Model model, @PathVariable("p_id") Long p_id, @PathVariable("c_id") Long c_id) {
         model.addAttribute("column", service.getColumn(c_id));
         return "project/column/delete";
     }
 
     @RequestMapping(value = "{p_id}/column/delete/{c_id}", method = RequestMethod.DELETE)
-    public String deleteColumn(@PathVariable("p_id") Long p_id, @PathVariable("c_id") Long c_id ) {
+    public String deleteColumn(@PathVariable("p_id") Long p_id, @PathVariable("c_id") Long c_id) {
         service.deleteColumn(c_id);
         return "redirect:project/detail";
     }
 
 
     @GetMapping(value = "{p_id}/column/update/{c_id}")
-    public String updateColumnPage(Model model, @PathVariable("p_id") Long p_id,@PathVariable("c_id") Long c_id) {
+    public String updateColumnPage(Model model, @PathVariable("p_id") Long p_id, @PathVariable("c_id") Long c_id) {
         model.addAttribute("column", service.getColumn(c_id));
         return "project/column/update";
     }
