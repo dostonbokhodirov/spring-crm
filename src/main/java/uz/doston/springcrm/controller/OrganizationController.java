@@ -80,10 +80,10 @@ public class OrganizationController extends AbstractController<OrganizationServi
         return "redirect:/organization/list";
     }
 
-    @RequestMapping(value = "detail/{id}", method = RequestMethod.GET)
-    String detailsPage(Model model, @PathVariable Long id) {
-        OrganizationDto organizationDto = service.get(id);
-        model.addAttribute("organization", organizationDto);
-        return "organization/detail";
+    @RequestMapping(value = "detail/{code}", method = RequestMethod.GET)
+    String detailsPage(Model model, @PathVariable String code) {
+//        codeOrganizationDto organizationDto = service.get(id);
+//        model.addAttribute("organization", organizationDto);
+        return "project/list";
     }
 }

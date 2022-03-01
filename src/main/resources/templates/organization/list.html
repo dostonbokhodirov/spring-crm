@@ -35,6 +35,11 @@
 
                 </td>
                 <td>
+                    <form  th:action="@{'/organization/detail/' + ${organization.code}}" th:method="get">
+                        <button type="submit" class="deletebtn">Detail</button>
+                    </form>
+                </td>
+                <td>
                     <button onclick="document.getElementById('id01').style.display='block'">delete</button>
                     <div id="id01" class="modal">
                         <span onclick="document.getElementById('id01').style.display='none'" class="close"
