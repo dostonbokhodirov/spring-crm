@@ -222,23 +222,48 @@ nav .input {
   line-height: 20px;
   color: #ffffff;
 }
-
-.MEDIUM {
-  background: #ff9533;
-  padding: 5px 7px;
-  border-radius: 12px;
+.my-box {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
+.my-box a {
+  padding: 8px 12px;
+  border: 1px solid #c2c5e1;
+  border-radius: 10px;
+  background-color: #04AA6D;
+  text-decoration: none;
+  color: white;
+}
+.MEDIUM {
+  background: #ff9533;
+  padding: 11px 10px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 19px;
+  color: white;
+}
+
+
+
+
 .LOW {
-  background: #67cb65;
-  padding: 5px 7px;
-  border-radius: 12px;
+  background: lightgreen;
+  padding: 11px 10px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 19px;
+  color: white;
 }
 
 .HIGH {
   background: #e74444;
-  padding: 5px 7px;
-  border-radius: 12px;
+  padding: 11px 10px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 19px;
+  color: white;
 }
 
 .todo-box p {

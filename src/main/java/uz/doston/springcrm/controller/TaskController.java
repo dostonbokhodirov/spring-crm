@@ -65,7 +65,7 @@ public class TaskController extends AbstractController<TaskService> {
         return "redirect:/project/list";
     }
 
-    @PostMapping(value = "detail/{id}")
+    @GetMapping(value = "detail/{id}")
     public String get(Model model, @PathVariable(value = "id") Long id) {
         model.addAttribute("task", service.get(id));
         model.addAttribute("comments", commentService.getAllByTaskId(id));

@@ -134,6 +134,15 @@ nav .input {
   gap: 20px;
 }
 
+.frozen{
+  background: red;
+  padding: 11px 10px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 19px;
+  color: white;
+}
+
 .content-actions {
   padding: 22px;
   width: 330px;

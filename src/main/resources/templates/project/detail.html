@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Red+Hat+Display&family=Rubik:wght@400;500;600;700&display=swap"
           rel="stylesheet">
+    <link rel="stylesheet" href="webjars/bootstrap/4.6.1/css/bootstrap.min.css">
 </head>
 <body>
 <header>
@@ -99,19 +100,15 @@
 
                         <div class="todoContent-box">
                             <div class="todo-img">
-                                <p th:utext="${column.name}"></p>
+                                <b  th:utext="${column.name}"></b>
                                 <img th:src="@{/imges/plus-circle.png}">
                             </div>
 
                             <td th:each="task,iter : ${column.tasks}">
                                 <div class="todo-box">
-                                    <div>
-                                        <form th:action="@{/task/detail/{id}(id=${task.id})}" method="post">
-                                            <button>
-                                                <a th:text="${task.name}"></a>
-                                            </button>
-                                        </form>
-                                        <button th:class="${task.level}" th:utext="${task.level}"></button>
+                                    <div class="my-box">
+                                            <a th:href="@{/task/detail/{id}(id=${task.id})}" th:text="${task.name}" class="btn btn-success mr-4"></a>
+                                            <span  th:class="${task.level}" th:text="${task.level}"></span>
                                     </div>
                                     <div class="task-participants" th:each="member,iterMember : ${task.taskMembers}">
                                         <p><span>Participant:  </span> <b th:utext="${member.username}"></b></p>
