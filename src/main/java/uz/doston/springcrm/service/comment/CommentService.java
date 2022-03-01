@@ -49,6 +49,12 @@ public class CommentService extends AbstractService<CommentMapper, CommentReposi
 
     public List<CommentDto> getAllByTaskId(Long id) {
         List<Comment> comments = repository.findAllByTaskId(id);
-        return mapper.toDto(comments);
+        List<CommentDto> commentDtoList = mapper.toDto(comments);
+        for (CommentDto dto : commentDtoList) {
+            for (Comment comment : comments) {
+                dto.setOwnerName(comment.getOwner().getFirstName());
+            }
+        }
+        return commentDtoList;
     }
 }

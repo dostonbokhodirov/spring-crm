@@ -43,7 +43,6 @@ public class ProjectController extends AbstractController<ProjectService> {
         return "redirect:/project/list";
     }
 
-
     @GetMapping(value = "delete/{id}")
     public String deletePage(Model model, @PathVariable("id") Long id) {
         model.addAttribute("project", service.get(id));
@@ -92,13 +91,11 @@ public class ProjectController extends AbstractController<ProjectService> {
         return "project/detail";
     }
 
-
     @GetMapping(value = "list")
     public String getAll(Model model) {
         model.addAttribute("projects", service.getAll());
         return "project/list";
     }
-
 
     @GetMapping(value = "{id}/column/create")
     public String createColumnPage(@PathVariable("id") Long id, Model model) {
@@ -112,7 +109,6 @@ public class ProjectController extends AbstractController<ProjectService> {
         return "redirect:/project/detail";
     }
 
-
     @GetMapping(value = "{p_id}/column/delete/{c_id}")
     public String deleteColumnPage(Model model, @PathVariable("p_id") Long p_id, @PathVariable("c_id") Long c_id) {
         model.addAttribute("column", service.getColumn(c_id));
@@ -124,7 +120,6 @@ public class ProjectController extends AbstractController<ProjectService> {
         service.deleteColumn(c_id);
         return "redirect:project/detail";
     }
-
 
     @GetMapping(value = "{p_id}/column/update/{c_id}")
     public String updateColumnPage(Model model, @PathVariable("p_id") Long p_id, @PathVariable("c_id") Long c_id) {
@@ -138,12 +133,4 @@ public class ProjectController extends AbstractController<ProjectService> {
         return "redirect:project/list";
     }
 
-//
-//    @GetMapping(value = "{id}/task/list")+
-
-//    public String getTasksList(@PathVariable("id") Long id,Model model) {
-//        model.addAttribute("tasks",service.getAllTasks(id));
-//
-//        return "task/index2";
-//    }
 }

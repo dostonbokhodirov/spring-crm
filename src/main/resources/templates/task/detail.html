@@ -112,45 +112,43 @@
                     <div class="content-box">
                         <p th:text="${task.description}"></p>
                     </div>
-                    <div class="content-box">
-                        <textarea placeholder="Комментарий..." id="" cols="10" rows="3"></textarea>
-                        <button type="submit">Опубликовать</button>
-                    </div>
+                    <form th:action="@{/comment/create/{id}(id=${task.id})}">
+                        <div class="content-box">
+                            <textarea placeholder="Comment..." id="" cols="10" rows="3"></textarea>
+                            <button type="submit">Publish</button>
+                        </div>
+                    </form>
 
-                    <div class="content-box">
+                    <div class="content-box" th:each="comment,iter : ${comments}">
                         <div class="flex">
-                            <p class="box-text"><img th:src="@{/imges/avatar.png}" alt="">Artur </p>
-                            <p>12/04/2021, 6:37 p.m</p>
+                            <p class="box-text"><img th:src="@{/imges/avatar.png}" alt=""
+                                                     th:text="${comment.ownerName}"></p>
+                            <p th:text="${comment.createdAt}"></p>
                         </div>
 
-                        <span>1. Добавлены шаблонные теги для подсчёта часов, потраченных на закрытые задачи.</span>
+                        <span th:text="${comment.text}"></span>
                     </div>
                 </div>
                 <div class="content-status">
                     <div class="status">
                         <div class="status-text">
                             <p>Priority:</p>
-                            <button class="low">Low</button>
+                            <button class="low" th:text="${task.priority}"></button>
                         </div>
 
                         <div class="status-text">
-                            <p>Priority:</p>
-                            <span>Frozen</span>
+                            <p>Frozen:</p>
+                            <span th:text="${task.frozen}"></span>
                         </div>
 
                         <div class="status-text">
-                            <p>Priority:</p>
-                            <span>12/04/2021</span>
+                            <p>Deadline:</p>
+                            <span th:text="${task.deadline}"></span>
                         </div>
 
                         <div class="status-text">
-                            <p>Priority:</p>
-                            <span>21/04/2021</span>
-                        </div>
-
-                        <div class="status-text">
-                            <p>Priority:</p>
-                            <span>Adyl, Azhar, Arthur</span>
+                            <p>Participants:</p>
+                            <span>Yozilmagan</span>
                         </div>
                     </div>
 
